@@ -33,7 +33,7 @@ const Input: React.FC<InputProps> = ({
         <input
           {...props}
           type={type === "password" && showPassword ? "text" : type}
-          className={`border rounded-lg w-full pr-10 ${sizeClasses[inputSize]} ${className}`}
+          className={`border border-black-transparent rounded-md w-full pr-10 ${sizeClasses[inputSize]} ${className}`}
         />
         {type === "password" && (
           <button
@@ -42,9 +42,9 @@ const Input: React.FC<InputProps> = ({
             className="relative right-8 focus:outline-none"
           >
             {showPassword ? (
-              <AiOutlineEye className="w-5 h-5" />
+              <AiOutlineEye className="w-5 h-5 text-secundary-gray" />
             ) : (
-              <AiOutlineEyeInvisible className="w-5 h-5" />
+              <AiOutlineEyeInvisible className="w-5 h-5 text-secundary-gray" />
             )}
           </button>
         )}
