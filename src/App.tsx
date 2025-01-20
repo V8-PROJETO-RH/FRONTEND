@@ -1,11 +1,12 @@
+import BasicSelectLocal from "./components/select-location/select-local"
 
-import BasicSelect from './components/select-model/select-model'
+
 function App() {
 
 
   return (
     <div>
-    <BasicSelect/>
+      < BasicSelectLocal />
     </div>
   
   )
