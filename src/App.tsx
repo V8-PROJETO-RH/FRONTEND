@@ -1,11 +1,12 @@
-import Testej from './components/testej'
+import Checkbox from './components/Checkbox';
 
 function App() {
 
 
+
   return (
     <div>
-    <Testej />
+      <Checkbox type="radio">Input radio</Checkbox>
     </div>
   
   )
