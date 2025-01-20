@@ -10,7 +10,8 @@ export default {
       'azul-tecnologia': '#0360DC',
       'verde-energia': '#65C98D',
       'roxo-misterio': '#8368C9',
-      'rosa-nebulosa': '#C968C8'
+      'rosa-nebulosa': '#C968C8',
+      'white': '#ffffff',
     },
     fontFamily: {
       mont: ['Montserrat', 'sans-serif'],
