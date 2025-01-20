@@ -1,11 +1,11 @@
-import Testej from './components/testej'
 
+import BasicSelect from './components/select-model/select-model'
 function App() {
 
 
   return (
     <div>
-    <Testej />
+    <BasicSelect/>
     </div>
   
   )
