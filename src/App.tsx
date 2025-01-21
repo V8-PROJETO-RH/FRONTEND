@@ -1,15 +1,16 @@
-import Checkbox from './components/Checkbox';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
 
 function App() {
-
-
-
   return (
-    <div>
-      <Checkbox type="radio">Input radio</Checkbox>
-    </div>
-  
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout pageSelected='home' />}>
+        
+        </Route>
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
