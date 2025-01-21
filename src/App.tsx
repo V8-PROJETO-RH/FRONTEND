@@ -1,18 +1,16 @@
-import Button from './components/Button'
-import Testej from './components/testej'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
 
 function App() {
-
-
   return (
-    <div>
-      <Testej />
-      <Button variant='special'>
-        <span className='font-mont font-bold text-white'>Ver Detalhes</span>
-      </Button>
-    </div>
-
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout pageSelected='home' />}>
+        
+        </Route>
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
