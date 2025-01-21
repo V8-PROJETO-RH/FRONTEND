@@ -16,6 +16,7 @@ export default {
       'secundary-gray': '#4A4A4A',
       'dark-blue': '#002C63',
       'black-transparent': 'rgba(0, 0, 0, 0.2)',
+      'black': '#00000'
     },
     fontFamily: {
       mont: ['Montserrat', 'sans-serif'],
