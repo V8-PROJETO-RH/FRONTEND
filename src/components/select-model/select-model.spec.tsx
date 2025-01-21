@@ -1,23 +1,35 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import SelectModel from './select-model'; 
 import '@testing-library/jest-dom';
-import BasicSelect from './select-model'; 
 
-test('renders select with default option', () => {
-  render(<BasicSelect />);
-  
+describe('SelectModel Component', () => {
+  test('renders the select with options', () => {
+    render(<SelectModel />);
 
-  expect(screen.getByText('Pesquise pelo Modelo de Trabalho')).toBeInTheDocument();
-  
-  
-  expect(screen.getByText('Selecione o tipo')).toBeInTheDocument();
-});
+    expect(screen.getByText(/modelo/i)).toBeInTheDocument();
 
-test('allows user to select a work model', () => {
-  render(<BasicSelect />);
   
+    const select = screen.getByRole('combobox');
+    expect(select).toBeInTheDocument();
+
   
-  fireEvent.change(screen.getByRole('combobox'), { target: { value: 'Remoto' } });
+    expect(screen.getByText(/remoto/i)).toBeInTheDocument();
+    expect(screen.getByText(/presencial/i)).toBeInTheDocument();
+    expect(screen.getByText(/híbrido/i)).toBeInTheDocument();
+  });
+
+  test('changes the value of select when an option is selected', () => {
+    render(<SelectModel />);
+
+    const select = screen.getByRole('combobox');
+    
   
-  
-  expect(screen.getByRole('combobox')).toHaveValue('Remoto');
+    expect(select).toHaveValue('');
+
+
+    fireEvent.change(select, { target: { value: 'Remoto' } });
+
+
+    expect(select).toHaveValue('Remoto');
+  });
 });

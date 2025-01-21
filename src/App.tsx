@@ -1,4 +1,5 @@
-import BasicSelectLocal from "./components/select-location/select-local"
+import SelectHome from "./components/select-model-home/select-model-home"
+import SelectModel from "./components/select-model/select-model"
 
 
 function App() {
@@ -6,7 +7,8 @@ function App() {
 
   return (
     <div>
-      < BasicSelectLocal />
+      < SelectModel />
+      < SelectHome />
     </div>
   
   )
