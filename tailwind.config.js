@@ -13,7 +13,10 @@ export default {
       'rosa-nebulosa': '#C968C8',
       'header-gray': '#F2F2F4',
       'white': '#ffffff',
-      'medium-gray':'#919192'
+      'medium-gray':'#919192',
+      'custom-background-select': 'rgb(244 245 248)',
+      'custom-text-select-blue': '#023376',
+      'custom-text-select-gray': '#666E7A'
     },
     fontFamily: {
       mont: ['Montserrat', 'sans-serif'],
