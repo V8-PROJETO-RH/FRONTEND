@@ -16,7 +16,12 @@ export default {
       'medium-gray':'#919192',
       'custom-background-select': 'rgb(244 245 248)',
       'custom-text-select-blue': '#023376',
-      'custom-text-select-gray': '#666E7A'
+      'custom-text-select-gray': '#666E7A',
+      'primary-gray': '#F2F2F4',
+      'secundary-gray': '#4A4A4A',
+      'dark-blue': '#002C63',
+      'black-transparent': 'rgba(0, 0, 0, 0.2)',
+      'black': '#00000'
     },
     fontFamily: {
       mont: ['Montserrat', 'sans-serif'],
