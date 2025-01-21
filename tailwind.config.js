@@ -11,7 +11,9 @@ export default {
       'verde-energia': '#65C98D',
       'roxo-misterio': '#8368C9',
       'rosa-nebulosa': '#C968C8',
+      'header-gray': '#F2F2F4',
       'white': '#ffffff',
+      'medium-gray':'#919192'
     },
     fontFamily: {
       mont: ['Montserrat', 'sans-serif'],
