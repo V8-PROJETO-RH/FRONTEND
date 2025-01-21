@@ -1,5 +1,7 @@
-import SelectHome from "./components/select-model-home/select-model-home"
-import SelectModel from "./components/select-model/select-model"
+import FilterSelect from "./components/select-filter/select-filter"
+import TestSelect from "./components/testej"
+
+
 
 
 function App() {
@@ -7,8 +9,7 @@ function App() {
 
   return (
     <div>
-      < SelectModel />
-      < SelectHome />
+      < TestSelect />
     </div>
   
   )
