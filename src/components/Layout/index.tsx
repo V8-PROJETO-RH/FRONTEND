@@ -38,7 +38,7 @@ export default function Layout({ pageSelected }: LayoutProps) {
                     </nav>
                 </div>
             </header>
-            <main className='h-screen'  >
+            <main className='h-[85vh]'>
                 <Outlet />
             </main>
             <footer className='flex justify-center items-center h-20 w-full'>

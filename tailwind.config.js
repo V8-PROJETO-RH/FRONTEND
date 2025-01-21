@@ -21,7 +21,11 @@ export default {
     fontFamily: {
       mont: ['Montserrat', 'sans-serif'],
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'home-background': "url('/src/assets/homeBackground.png')",
+      }
+    },
   },
   plugins: [],
 }
