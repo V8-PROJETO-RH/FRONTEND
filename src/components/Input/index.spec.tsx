@@ -60,4 +60,60 @@ describe('CustomInput component', () => {
 
     expect(screen.queryByText(/option 1/i)).not.toBeInTheDocument();
   });
+
+  test('toggles password visibility', () => {
+    render(<CustomInput label="Password" type="password" id="password-input" />);
+
+    const toggleButton = screen.getByRole('button');
+    const input = screen.getByRole('textbox');
+
+    expect(input).toHaveAttribute('type', 'password');
+    
+    fireEvent.click(toggleButton);
+    
+    expect(input).toHaveAttribute('type', 'text');
+    
+    fireEvent.click(toggleButton);
+
+    expect(input).toHaveAttribute('type', 'password');
+  });
+
+  test('adds selected item on Enter key press', () => {
+    render(<CustomInput label="Input" isSearch={true} id="custom-input" />);
+
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'NewItem' } });
+    fireEvent.keyUp(input, { key: 'Enter', code: 'Enter' });
+
+    expect(screen.getByText(/newitem/i)).toBeInTheDocument();
+  });
+
+  test('removes selected item when clicking on remove icon', () => {
+    const suggestions = ['Item1', 'Item2'];
+    render(<CustomInput label="Input" isSearch={true} suggestions={suggestions} id="removable-item-input" />);
+
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'Item1' } });
+    fireEvent.keyUp(input, { key: 'Enter', code: 'Enter' });
+
+    const removeIcon = screen.getByRole('button', { name: /remove/i });
+    fireEvent.click(removeIcon);
+
+    expect(screen.queryByText(/item1/i)).not.toBeInTheDocument();
+  });
+
+  test('clears input when clear icon is clicked', () => {
+    render(<CustomInput label="Clearable" isSearch={true} id="clearable-input" />);
+
+    const input = screen.getByRole('textbox');
+    const clearIcon = screen.getByRole('button', { name: /clear/i });
+
+    fireEvent.change(input, { target: { value: 'ClearMe' } });
+
+    expect(input).toHaveValue('ClearMe');
+
+    fireEvent.click(clearIcon);
+
+    expect(input).toHaveValue('');
+  });
 });

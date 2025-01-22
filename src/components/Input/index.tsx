@@ -15,9 +15,9 @@ interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const sizeClasses = {
-  small: 'px-3 py-2 text-sm max-w-sm',
-  medium: 'px-3 py-2 text-md max-w-md',
-  large: 'px-3 py-2 text-lg max-w-full',
+  small: 'text-sm max-w-sm',
+  medium: 'text-md max-w-md',
+  large: 'text-lg max-w-full',
 };
 
 const CustomInput: React.FC<CustomInputProps> = ({
@@ -32,7 +32,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
   bgColor = 'bg-white',
   ...props
 }) => {
-  const [query, setQuery] = useState('');
+  const [word, setWord] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
@@ -41,7 +41,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setQuery(value);
+    setWord(value);
     if (isSearch) {
       updateDropdown(value);
     }
@@ -66,15 +66,15 @@ const CustomInput: React.FC<CustomInputProps> = ({
   };
 
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && query.trim() !== '') {
-      addSelectedItem(query.trim());
+    if (isSearch && e.key === 'Enter' && word.trim() !== '') {
+      addSelectedItem(word.trim());
     }
   };
 
   const addSelectedItem = (item: string) => {
-    if (!selectedItems.includes(item)) {
+    if (isSearch && !selectedItems.includes(item)) {
       setSelectedItems([...selectedItems, item]);
-      setQuery('');
+      setWord('');
       setDropdownOpen(false);
     }
   };
@@ -87,8 +87,8 @@ const CustomInput: React.FC<CustomInputProps> = ({
     setShowPassword(!showPassword);
   };
 
-  const clearQuery = () => {
-    setQuery('');
+  const clearWord = () => {
+    setWord('');
     setFilteredSuggestions([]);
     setDropdownOpen(false);
   };
@@ -125,11 +125,11 @@ const CustomInput: React.FC<CustomInputProps> = ({
       <div className={`flex items-center ${bgColor} border border-black-transparent rounded-lg px-3 py-2`}>
         <input
           {...props}
-          type={type === 'password' && showPassword ? 'text' : 'text'}
-          value={query}
+          type={type === 'password' && showPassword ? 'text' : type}
+          value={word}
           onChange={handleInputChange}
-          onFocus={() => isSearch && updateDropdown(query)}
-          onKeyPress={handleKeyPress}
+          onFocus={() => isSearch && updateDropdown(word)}
+          onKeyUp={handleKeyPress}
           className={`flex-1 ${bgColor} outline-none text-black`}
         />
         {type === 'password' && (
@@ -141,18 +141,17 @@ const CustomInput: React.FC<CustomInputProps> = ({
             )}
           </button>
         )}
-        {query.length > 0 ? (
-          <IoClose className="w-5 h-5 text-secundary-gray ml-2 cursor-pointer" onClick={clearQuery} />
-        ) : (
-          isSearch && (
-            <button
-              type="button"
-              onClick={toggleDropdownIcon ? toggleDropdown : () => updateDropdown(query)}
-              className="ml-2 focus:outline-none"
-            >
-              {icon}
-            </button>
-          )
+        {isSearch && word.length > 0 && (
+          <IoClose className="w-5 h-5 text-secundary-gray ml-2 cursor-pointer" onClick={clearWord} />
+        )}
+        {!word.length && isSearch && (
+          <button
+            type="button"
+            onClick={toggleDropdownIcon ? toggleDropdown : () => updateDropdown(word)}
+            className="ml-2 focus:outline-none"
+          >
+            {icon}
+          </button>
         )}
       </div>
       {dropdownOpen && filteredSuggestions.length > 0 && (
