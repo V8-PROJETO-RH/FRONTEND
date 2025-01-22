@@ -57,7 +57,7 @@ const Application: React.FC = () => {
         </div>
       </div>
 
-      <div className="col-span-9 ml-12 w-[100%]">
+      <div className="col-span-9 ml-12">
         <p className="text-light-gray font-bold text-sm mt-3 mb-11 uppercase">
           Você está se candidatando para a vaga <span className="text-light-blue underline">Desenvolvedor Front-End Sênior Angular</span>
         </p>
