@@ -29,6 +29,7 @@ export default {
     extend: {
       backgroundImage: {
         'home-background': "url('/src/assets/homeBackground.png')",
+        'home-image': "url('/src/assets/homeImage.png')",
       }
     },
   },
