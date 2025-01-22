@@ -27,13 +27,13 @@ export default function Layout({ pageSelected }: LayoutProps) {
 
                     <nav>
                         <ul className='flex flex-row gap-4 align-center'>
-                            <li className={`font-mont cursor-pointer ${pageSelected == 'home' ? 'font-bold text-azul-infinito' : 'text-medium-gray font-medium'} `}  >HOME</li>
+                            <li className={`font-mont cursor-pointer ${pageSelected == 'home' ? 'font-bold text-azul-infinito' : 'text-medium-gray font-medium hover:text-azul-infinito'} `}  >HOME</li>
                             <span className='font-mont  text-medium-gray'>|</span>
-                            <li className={`font-mont cursor-pointer ${pageSelected == 'alerts' ? 'font-bold text-azul-infinito' : 'text-medium-gray font-medium'} `}>ALERTAS DE VAGAS</li>
+                            <li className={`font-mont cursor-pointer ${pageSelected == 'alerts' ? 'font-bold text-azul-infinito' : 'text-medium-gray font-medium hover:text-azul-infinito'} `}>ALERTAS DE VAGAS</li>
                             <span className='font-mont  text-medium-gray'>|</span>
-                            <li className={`font-mont cursor-pointer ${pageSelected == 'search' ? 'font-bold text-azul-infinito' : 'text-medium-gray font-medium'} `}>PESQUISAR CARGOS</li>
+                            <li className={`font-mont cursor-pointer ${pageSelected == 'search' ? 'font-bold text-azul-infinito' : 'text-medium-gray font-medium hover:text-azul-infinito'} `}>PESQUISAR CARGOS</li>
                             <span className='font-mont  text-medium-gray'>|</span>
-                            <li className={`font-mont cursor-pointer ${pageSelected == 'applications' ? 'font-bold text-azul-infinito' : 'text-medium-gray font-medium'} `}>MINHAS CANDIDATURAS</li>
+                            <li className={`font-mont cursor-pointer ${pageSelected == 'applications' ? 'font-bold text-azul-infinito' : 'text-medium-gray font-medium hover:text-azul-infinito'} `}>MINHAS CANDIDATURAS</li>
                         </ul>
                     </nav>
                 </div>
