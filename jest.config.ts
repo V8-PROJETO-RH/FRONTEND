@@ -4,6 +4,9 @@ const config: Config = {
   testEnvironment: 'jest-environment-jsdom',
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
+    '\\.png$': 'jest-transform-stub',
+    '\\.jpg$': 'jest-transform-stub',
+    '\\.jpeg$': 'jest-transform-stub',
   },
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   moduleNameMapper: {

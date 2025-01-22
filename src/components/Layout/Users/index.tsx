@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
-import LogoHorizontal from '../../assets/logo(Color)Horizontal.png';
-import ProfileIcon from '../../assets/profileIcon.svg'
-import GlobeIcon from '../../assets/World.svg'
+import LogoHorizontal from '../../../assets/logo(Color)Horizontal.png';
+import ProfileIcon from '../../../assets/profileIcon.svg'
+import GlobeIcon from '../../../assets/World.svg'
 
 interface LayoutProps {
     pageSelected: 'home' | 'alerts' | 'search' | 'applications';
