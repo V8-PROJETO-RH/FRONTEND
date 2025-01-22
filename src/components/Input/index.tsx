@@ -130,7 +130,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
           onChange={handleInputChange}
           onFocus={() => isSearch && updateDropdown(query)}
           onKeyPress={handleKeyPress}
-          className={`flex-1 ${bgColor} outline-none text-gray-700`}
+          className={`flex-1 ${bgColor} outline-none text-black`}
         />
         {type === 'password' && (
           <button type="button" onClick={togglePasswordVisibility} className="ml-2 focus:outline-none">

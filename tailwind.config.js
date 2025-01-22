@@ -19,7 +19,10 @@ export default {
       'custom-text-select-gray': '#666E7A',
       'primary-gray': '#F2F2F4',
       'secundary-gray': '#4A4A4A',
+      'gray': 'rgba(102, 110, 122, 0.4)',
+      'light-gray': '#909090',
       'dark-blue': '#002C63',
+      'light-blue': '#0360DC',
       'black-transparent': 'rgba(0, 0, 0, 0.2)',
       'black': '#00000'
     },
