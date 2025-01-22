@@ -107,7 +107,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
   }, []);
 
   return (
-    <div ref={containerRef} className={`flex flex-col mb-4 relative w-full ${sizeClasses[inputSize]} ${className}`}>
+    <div ref={containerRef} className={`flex flex-col mb-4 relative w-full ${className}`}>
       <label className="mb-2 font-semibold text-black">{label}</label>
       {selectedItems.length > 0 && (
         <div className="flex flex-wrap mb-2">
@@ -125,7 +125,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
       <div className={`flex items-center ${bgColor} border border-black-transparent rounded-lg px-3 py-2`}>
         <input
           {...props}
-          type={type === 'password' && showPassword ? 'text' : 'text'}
+          type={type === 'password' && !showPassword ? 'password' : 'text'}
           value={query}
           onChange={handleInputChange}
           onFocus={() => isSearch && updateDropdown(query)}
