@@ -16,7 +16,7 @@ export default function Home() {
 
     return (
         <>
-            <div className="px-[80px] bg-home-background bg-no-repeat h-[68vh] w-full flex items-center justify-between bg-azul-infinito">
+            <div className="px-[80px] bg-home-background bg-bottom bg-cover bg-no-repeat h-[80vh] w-full flex items-center justify-between bg-azul-infinito">
                 <h1 className="text-white  font-mont text-6xl font-extrabold" >
                     VENHA SER SUA <br /> MELHOR VERSÃO <br /> NA V8.
                 </h1>
