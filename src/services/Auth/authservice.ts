@@ -1,4 +1,4 @@
-import { LoginCredentials, LoginResponse } from '../../types/types';
+import { LoginCredentials, LoginResponse } from './types';
 
 const API_URL = 'http://localhost:8081/api';
 

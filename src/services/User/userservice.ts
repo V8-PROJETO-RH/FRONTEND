@@ -1,7 +1,7 @@
 
 
 import { jwtDecode } from 'jwt-decode';
-import { JwtPayload } from '../../types/types';
+import { JwtPayload } from './types';
 
 const UserService = {
   decodeToken: (token: string): JwtPayload => {

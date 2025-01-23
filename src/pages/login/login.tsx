@@ -4,15 +4,11 @@ import CustomInput from "../../components/Input";
 import Button from "../../components/Button";
 import { VscArrowRight } from "react-icons/vsc";
 import AuthService from "../../services/Auth/authservice";
-
-interface FormInputs {
-  email: string;
-  senha: string;
-}
+import {FormInputs} from "./types"
 
 const LoginComponent: React.FC = () => {
   const { register, handleSubmit, formState: { errors }, trigger } = useForm<FormInputs>({
-    mode: "onChange", // Executa validação enquanto o usuário digita
+    mode: "onChange", 
   });
 
   const [error, setError] = useState<string | null>(null);
@@ -95,6 +91,19 @@ const LoginComponent: React.FC = () => {
 
             {error && <p className="text-red-500 font-bold font-mont">{error}</p>}
 
+            <div className="flex justify-between items-center">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  className="text-blue-500 border-gray-300 rounded w-4 h-4 focus:ring-blue-500"
+                />
+                <span className="ml-2 text-sm text-[#2B3674]">Mantenha logado</span>
+              </label>
+              <a href="#" className="text-sm font-bold text-blue-login underline">
+                Esqueceu sua senha?
+              </a>
+            </div>
+
             <Button
               type="submit"
               variant="secondary"
@@ -104,7 +113,6 @@ const LoginComponent: React.FC = () => {
               <VscArrowRight className="text-white text-2xl" />
             </Button>
           </form>
-
           <div className="w-[78%] flex items-center h-10">
             <p className="mx-auto text-[#475569]">ou</p>
           </div>
