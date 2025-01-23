@@ -1,4 +1,5 @@
-import { LoginCredentials, LoginResponse } from './types';
+import { LoginCredentials, LoginResponse , RegisterData , RegisterResponse } from './types';
+
 
 const API_URL = 'http://localhost:8081/api';
 
@@ -21,6 +22,22 @@ const AuthService = {
     return data;
   },
 
+  register: async (data: RegisterData): Promise<RegisterResponse> => {
+    const response = await fetch(`${API_URL}/register`, { // Certifique-se que o endpoint esteja correto
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error('Erro ao registrar');
+    }
+
+    const result: RegisterResponse = await response.json();
+    return result;
+  },
 };
 
 export default AuthService;

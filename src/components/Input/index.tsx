@@ -12,7 +12,7 @@ import { IoClose } from "react-icons/io5";
 
 interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  type?: "text" | "password";
+  type?: "text" | "password" | "date";
   isSearch?: boolean;
   toggleDropdownIcon?: boolean;
   inputSize?: "small" | "medium" | "large";
