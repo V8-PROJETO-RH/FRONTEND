@@ -56,12 +56,13 @@ const LoginComponent: React.FC = () => {
                   pattern: {
                     value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                     message: "Formato de e-mail inválido",
-                  }
+                  },
                 })}
-                onBlur={() => trigger("email")}
               />
               {errors.email && (
-                <p className="text-red-500 font-bold font-mont mt-1 text-xs">{errors.email.message}</p>
+                <p className="text-red-500 font-bold font-mont mt-1 text-xs">
+                  {errors.email.message}
+                </p>
               )}
             </div>
 
@@ -78,28 +79,18 @@ const LoginComponent: React.FC = () => {
                     message: "Senha deve ter no mínimo 8 caracteres",
                   },
                   validate: {
-                    hasNumber: v => /\d/.test(v) || "Senha deve conter pelo menos um número",
-                    hasSpecialChar: v => /[!@#$%^&*]/.test(v) || "Senha deve conter pelo menos um caractere especial",
-                  }
+                    hasNumber: (value) =>
+                      /\d/.test(value) || "Senha deve conter pelo menos um número",
+                    hasSpecialChar: (value) =>
+                      /[!@#$%^&*]/.test(value) || "Senha deve conter pelo menos um caractere especial",
+                  },
                 })}
-                onBlur={() => trigger("senha")}
               />
               {errors.senha && (
-                <p className="text-red-500 font-bold font-mont mt-1 text-xs">{errors.senha.message}</p>
+                <p className="text-red-500 font-bold font-mont mt-1 text-xs">
+                  {errors.senha.message}
+                </p>
               )}
-            </div>
-
-            <div className="flex justify-between items-center">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  className="text-blue-500 border-gray-300 rounded w-4 h-4 focus:ring-blue-500"
-                />
-                <span className="ml-2 text-sm text-[#2B3674]">Mantenha logado</span>
-              </label>
-              <a href="#" className="text-sm font-bold text-blue-login underline">
-                Esqueceu sua senha?
-              </a>
             </div>
 
             {error && <p className="text-red-500 font-bold font-mont">{error}</p>}
