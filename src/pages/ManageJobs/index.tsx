@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 import CustomInput from "../../components/Input";
+import useManageJobs from "./hook";
 
 export default function ManageJobs() {
+  useManageJobs();
+
   return(
     <div className="py-12 px-8">
       <div className="border-b border-solid border-b-verde-energia">
