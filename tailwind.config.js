@@ -13,7 +13,7 @@ export default {
       'rosa-nebulosa': '#C968C8',
       'header-gray': '#F2F2F4',
       'white': '#ffffff',
-      'medium-gray':'#919192',
+      'medium-gray': '#919192',
       'custom-background-select': 'rgb(244 245 248)',
       'custom-text-select-blue': '#023376',
       'custom-text-select-gray': '#666E7A',
@@ -21,7 +21,10 @@ export default {
       'secundary-gray': '#4A4A4A',
       'dark-blue': '#002C63',
       'black-transparent': 'rgba(0, 0, 0, 0.2)',
-      'black': '#00000'
+      'black': '#00000',
+      'transparent-gray': 'rgba(190, 190, 190, 0.5)',
+      'light-blue': '#0360DC',
+      'gray': '#4B4B4B'
     },
     fontFamily: {
       mont: ['Montserrat', 'sans-serif'],
