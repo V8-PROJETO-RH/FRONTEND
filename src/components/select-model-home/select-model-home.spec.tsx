@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Select from './select-model-home';  // Ajuste o caminho se necessário
+import Select from './select-model-home'; 
 
 describe('Select Component', () => {
   const options = [
@@ -11,13 +11,11 @@ describe('Select Component', () => {
 
   test('renders without crashing and displays the label', () => {
     render(<Select label="Select a location" options={options} onChange={() => {}} />);
-    // Verifique se o label aparece na tela
     expect(screen.getByText('Select a location')).toBeInTheDocument();
   });
 
   test('renders the correct number of options', () => {
     render(<Select label="Select a location" options={options} onChange={() => {}} />);
-    // Inclui a opção desabilitada padrão
     expect(screen.getAllByRole('option').length).toBe(options.length + 1);
   });
 
@@ -25,8 +23,9 @@ describe('Select Component', () => {
     const handleChange = jest.fn();
     render(<Select label="Select a location" options={options} onChange={handleChange} />);
     
-    // Simulate changing the selected value
+  
     fireEvent.change(screen.getByRole('combobox'), { target: { value: 'Opção 2' } });
+
     expect(handleChange).toHaveBeenCalledTimes(1);
     expect(handleChange).toHaveBeenCalledWith('Opção 2');
   });
@@ -42,10 +41,9 @@ describe('Select Component', () => {
       />
     );
 
-    // Verifique a classe no rótulo
+  
     expect(screen.getByText('Select a location')).toHaveClass('custom-label');
 
-    // Verifique as classes nas opções
     options.forEach(option => {
       expect(screen.getByText(option.name)).toHaveClass('custom-option');
     });
@@ -54,8 +52,13 @@ describe('Select Component', () => {
   test('displays IoIosArrowDown icon', () => {
     render(<Select label="Select a location" options={options} onChange={() => {}} />);
     
-    // Verifique o ícone usando o "data-testid"
+    // Check if the dropdown icon is rendered
     const icon = screen.getByTestId('dropdown-icon');
     expect(icon).toBeInTheDocument();
+  });
+
+  test('displays placeholder text when no option is selected', () => {
+    render(<Select label="Select a location" options={options} onChange={() => {}} />);
+    expect(screen.getByText('Selecione uma opção')).toBeInTheDocument();
   });
 });

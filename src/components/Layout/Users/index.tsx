@@ -1,7 +1,7 @@
-import { Outlet } from 'react-router-dom';
-import LogoHorizontal from '../../assets/logo(Color)Horizontal.png';
-import ProfileIcon from '../../assets/profileIcon.svg'
-import GlobeIcon from '../../assets/World.svg'
+import { Outlet, Link } from 'react-router-dom';
+import LogoHorizontal from '../../../assets/logo(Color)Horizontal.png';
+import ProfileIcon from '../../../assets/profileIcon.svg'
+import GlobeIcon from '../../../assets/World.svg'
 
 interface LayoutProps {
     pageSelected: 'home' | 'alerts' | 'search' | 'applications';
@@ -21,24 +21,24 @@ export default function Layout({ pageSelected }: LayoutProps) {
                         </div>
                         <div className='flex flex-row items-center gap-2'>
                             <img src={ProfileIcon} alt="" />
-                            <a className='font-mont font-medium cursor-pointer text-sm'>Login</a>
+                            <Link to="/login" className='font-mont font-medium cursor-pointer text-sm'>Login</Link>
                         </div>
                     </div>
 
                     <nav>
                         <ul className='flex flex-row gap-4 align-center'>
-                            <li className={`font-mont cursor-pointer ${pageSelected == 'home' ? 'font-bold text-azul-infinito' : 'text-medium-gray font-medium'} `}  >HOME</li>
+                            <li className={`font-mont cursor-pointer ${pageSelected == 'home' ? 'font-bold text-azul-infinito' : 'text-medium-gray font-medium hover:text-azul-infinito'} `}  >HOME</li>
                             <span className='font-mont  text-medium-gray'>|</span>
-                            <li className={`font-mont cursor-pointer ${pageSelected == 'alerts' ? 'font-bold text-azul-infinito' : 'text-medium-gray font-medium'} `}>ALERTAS DE VAGAS</li>
+                            <li className={`font-mont cursor-pointer ${pageSelected == 'alerts' ? 'font-bold text-azul-infinito' : 'text-medium-gray font-medium hover:text-azul-infinito'} `}>ALERTAS DE VAGAS</li>
                             <span className='font-mont  text-medium-gray'>|</span>
-                            <li className={`font-mont cursor-pointer ${pageSelected == 'search' ? 'font-bold text-azul-infinito' : 'text-medium-gray font-medium'} `}>PESQUISAR CARGOS</li>
+                            <li className={`font-mont cursor-pointer ${pageSelected == 'search' ? 'font-bold text-azul-infinito' : 'text-medium-gray font-medium hover:text-azul-infinito'} `}>PESQUISAR CARGOS</li>
                             <span className='font-mont  text-medium-gray'>|</span>
-                            <li className={`font-mont cursor-pointer ${pageSelected == 'applications' ? 'font-bold text-azul-infinito' : 'text-medium-gray font-medium'} `}>MINHAS CANDIDATURAS</li>
+                            <li className={`font-mont cursor-pointer ${pageSelected == 'applications' ? 'font-bold text-azul-infinito' : 'text-medium-gray font-medium hover:text-azul-infinito'} `}>MINHAS CANDIDATURAS</li>
                         </ul>
                     </nav>
                 </div>
             </header>
-            <main className='h-screen'  >
+            <main className='overflow-x-hidden'>
                 <Outlet />
             </main>
             <footer className='flex justify-center items-center h-20 w-full'>

@@ -24,13 +24,19 @@ export default {
       'dark-blue': '#002C63',
       'light-blue': '#0360DC',
       'black-transparent': 'rgba(0, 0, 0, 0.2)',
-      'black': '#00000'
+      'black': '#00000',
+      'blue-login': '#002A7B',
+      'red-500': '#ef4444', 
     },
     fontFamily: {
       mont: ['Montserrat', 'sans-serif'],
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'home-background': "url('/src/assets/homeBackground.png')",
+        'home-image': "url('/src/assets/homeImage.png')",
+      }
+    },
   },
   plugins: [],
 }
-

@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -115,7 +115,15 @@
 <a name='L50'></a><a href='#L50'>50</a>
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -131,16 +139,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -153,7 +169,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -181,9 +197,17 @@ interface SelectProps {
   onChange: (value: string) =&gt; void;
   labelClassName?: string;
   optionClassName?: string;
+  placeholder?: string; // Nova prop para o placeholder
 }
 &nbsp;
-const Select: React.FC&lt;SelectProps&gt; = ({ label, options, onChange, labelClassName, optionClassName }) =&gt; {
+const Select: React.FC&lt;SelectProps&gt; = ({
+  label,
+  options,
+  onChange,
+  labelClassName,
+  optionClassName,
+  placeholder = 'Selecione uma opção', // Valor padrão para o placeholder
+}) =&gt; {
   const [selectedValue, setSelectedValue] = useState&lt;string&gt;('');
 &nbsp;
   const handleChange = (e: React.ChangeEvent&lt;HTMLSelectElement&gt;) =&gt; {
@@ -194,15 +218,15 @@ const Select: React.FC&lt;SelectProps&gt; = ({ label, options, onChange, labelCl
 &nbsp;
   return (
     &lt;div className="flex flex-col justify-center items-center min-h-screen px-4"&gt;
-      &lt;div className="relative w-full max-w-md bg-custom-background-select rounded border border-gray-300"&gt;
+      &lt;div className="relative w-full max-w-md bg-custom-background-select rounded border border-medium-gray"&gt;
         {label &amp;&amp; &lt;div className={`text-custom-text-select-blue mb-1 pl-2 ${labelClassName}`}&gt;{label}&lt;/div&gt;}
         &lt;select
           value={selectedValue}
           onChange={handleChange}
-          className="w-full text-custom-text-select-gray p-2 bg-custom-background-select text-gray-500 bg-white rounded border-none focus:outline-none appearance-none"
+          className="w-full text-custom-text-select-gray p-2 bg-custom-background-select text-gray-500 rounded focus:outline-none appearance-none"
         &gt;
           &lt;option value="" disabled&gt;
-            Selecione o local
+            {placeholder}
           &lt;/option&gt;
           {options.map((option) =&gt; (
             &lt;option key={option.id} value={option.name} className={optionClassName}&gt;
@@ -226,7 +250,7 @@ export default Select;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-01-27T16:24:06.198Z
+                at 2025-01-27T18:50:19.505Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
