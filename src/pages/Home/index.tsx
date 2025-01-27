@@ -12,6 +12,24 @@ import LocalIcon from '../../assets/localIcon.svg'
 import WorkTipe from '../../assets/companhia1.svg'
 import IconContratio from '../../assets/contrato 1.png'
 import shareIcon from '../../assets/shareIcon.svg'
+import { useEffect, useState } from "react";
+import Stepper from "../../components/Stepper";
+
+interface Vaga  {
+    ID: number;
+    tipo_Vaga: string;
+    Localidade: string;
+    modelo_Vaga: string;
+    Descricao: string;
+    Responsabilidade: string;
+    Requisitos: string;
+    faixa_Salarial: string;
+    regime_Contratacao: string;
+    Beneficios: string;
+    Status: string;
+    quantidade_Vagas: number;
+    responsavel_ID: number;    
+}
 
 export default function Home() {
 
@@ -19,6 +37,73 @@ export default function Home() {
         threshold: 0.15, // Porcentagem da seção visível para ativar
         triggerOnce: false,
     });
+
+    const [vagas, setVagas] = useState<Vaga[]>([])
+    const [currentStep, setCurrentStep] = useState(1)
+
+    useEffect(() => {
+        console.log(currentStep)
+    }, [currentStep])
+
+    useEffect(() => {
+        const fetchVagas = async () => {
+            const vagas = await getVagas()
+
+            if(vagas !== undefined) {
+                setVagas(vagas)
+            }
+        }
+        fetchVagas()
+    }, [])
+
+
+    
+    async function getVagas() {
+        try {
+            const res = await fetch('https://run.mocky.io/v3/d89c3f15-1486-45ea-aaa2-e5d4ba1281a2') 
+            const data: Vaga[] = await res.json()
+
+            if(data) {
+                console.log(data)
+                return data
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    function showVagas(vagas: Vaga[]) {
+        return vagas.map(vaga => (
+            <div className="w-[350px] border-[1px] border-solid border-transparent-gray rounded-lg p-4">
+            <h1 className="text-m font-mont text-light-blue font-semibold mb-0">{vaga.tipo_Vaga}</h1>
+            <h3 className="m-0 font-mont text-gray font-medium">Pleno</h3>
+            <div className="flex w-full gap-4 mt-3 flex-wrap">
+                <div className="flex items-center gap-1 w-1/2">
+                    <img src={LocalIcon} alt="" />
+                    <p className="text-m">{vaga.Localidade}</p>
+                </div>
+                <div className="flex items-center gap-1 w-1/3">
+                    <img src={WorkTipe} alt="" />
+                    <p className="text-m ">{vaga.modelo_Vaga}</p>
+                </div>
+                <div className="flex items-center gap-1 w-1/2">
+                    <img src={IconContratio} alt="" />
+                    <p className="text-m">{vaga.regime_Contratacao}</p>
+                </div>
+            </div>
+            <p className="text-sm mt-4">Publicada em: 01/01/2025</p>
+            <div className="mt-6 flex gap-2 items-center w-full">
+                <Button variant="primary" className="px-5 py-[8px] w-[170px]">
+                    <p className="font-mont text-white font-bold text-sm">VER DETALHES</p>
+                </Button>
+                <a href="" className="flex items-center">
+                    <img src={shareIcon} alt="" />
+                    <p className="font-mont font-medium text-sm">Compartilhar</p>
+                </a>
+            </div>
+        </div>
+        ))
+    }
 
 
     return (
@@ -121,205 +206,11 @@ export default function Home() {
                                 </a>
                             </div>
                         </div>
-                        <div className="w-[350px] border-[1px] border-solid border-transparent-gray rounded-lg p-4">
-                            <h1 className="text-m font-mont text-light-blue font-semibold mb-0">Desenvolvedor(a) Front-End</h1>
-                            <h3 className="m-0 font-mont text-gray font-medium">Pleno</h3>
-                            <div className="flex w-full gap-4 mt-3 flex-wrap">
-                                <div className="flex items-center gap-1 w-1/2">
-                                    <img src={LocalIcon} alt="" />
-                                    <p className="text-m">São Paulo</p>
-                                </div>
-                                <div className="flex items-center gap-1 w-1/3">
-                                    <img src={WorkTipe} alt="" />
-                                    <p className="text-m ">Presencial</p>
-                                </div>
-                                <div className="flex items-center gap-1 w-1/2">
-                                    <img src={IconContratio} alt="" />
-                                    <p className="text-m">CLT</p>
-                                </div>
-                            </div>
-                            <p className="text-sm mt-4">Publicada em: 01/01/2025</p>
-                            <div className="mt-6 flex gap-2 items-center w-full">
-                                <Button variant="primary" className="px-5 py-[8px] w-[170px]">
-                                    <p className="font-mont text-white font-bold text-sm">VER DETALHES</p>
-                                </Button>
-                                <a href="" className="flex items-center">
-                                    <img src={shareIcon} alt="" />
-                                    <p className="font-mont font-medium text-sm">Compartilhar</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div className="w-[350px] border-[1px] border-solid border-transparent-gray rounded-lg p-4">
-                            <h1 className="text-m font-mont text-light-blue font-semibold mb-0">Desenvolvedor(a) Front-End</h1>
-                            <h3 className="m-0 font-mont text-gray font-medium">Pleno</h3>
-                            <div className="flex w-full gap-4 mt-3 flex-wrap">
-                                <div className="flex items-center gap-1 w-1/2">
-                                    <img src={LocalIcon} alt="" />
-                                    <p className="text-m">São Paulo</p>
-                                </div>
-                                <div className="flex items-center gap-1 w-1/3">
-                                    <img src={WorkTipe} alt="" />
-                                    <p className="text-m ">Presencial</p>
-                                </div>
-                                <div className="flex items-center gap-1 w-1/2">
-                                    <img src={IconContratio} alt="" />
-                                    <p className="text-m">CLT</p>
-                                </div>
-                            </div>
-                            <p className="text-sm mt-4">Publicada em: 01/01/2025</p>
-                            <div className="mt-6 flex gap-2 items-center w-full">
-                                <Button variant="primary" className="px-5 py-[8px] w-[170px]">
-                                    <p className="font-mont text-white font-bold text-sm">VER DETALHES</p>
-                                </Button>
-                                <a href="" className="flex items-center">
-                                    <img src={shareIcon} alt="" />
-                                    <p className="font-mont font-medium text-sm">Compartilhar</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div className="w-[350px] border-[1px] border-solid border-transparent-gray rounded-lg p-4">
-                            <h1 className="text-m font-mont text-light-blue font-semibold mb-0">Desenvolvedor(a) Front-End</h1>
-                            <h3 className="m-0 font-mont text-gray font-medium">Pleno</h3>
-                            <div className="flex w-full gap-4 mt-3 flex-wrap">
-                                <div className="flex items-center gap-1 w-1/2">
-                                    <img src={LocalIcon} alt="" />
-                                    <p className="text-m">São Paulo</p>
-                                </div>
-                                <div className="flex items-center gap-1 w-1/3">
-                                    <img src={WorkTipe} alt="" />
-                                    <p className="text-m ">Presencial</p>
-                                </div>
-                                <div className="flex items-center gap-1 w-1/2">
-                                    <img src={IconContratio} alt="" />
-                                    <p className="text-m">CLT</p>
-                                </div>
-                            </div>
-                            <p className="text-sm mt-4">Publicada em: 01/01/2025</p>
-                            <div className="mt-6 flex gap-2 items-center w-full">
-                                <Button variant="primary" className="px-5 py-[8px] w-[170px]">
-                                    <p className="font-mont text-white font-bold text-sm">VER DETALHES</p>
-                                </Button>
-                                <a href="" className="flex items-center">
-                                    <img src={shareIcon} alt="" />
-                                    <p className="font-mont font-medium text-sm">Compartilhar</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div className="w-[350px] border-[1px] border-solid border-transparent-gray rounded-lg p-4">
-                            <h1 className="text-m font-mont text-light-blue font-semibold mb-0">Desenvolvedor(a) Front-End</h1>
-                            <h3 className="m-0 font-mont text-gray font-medium">Pleno</h3>
-                            <div className="flex w-full gap-4 mt-3 flex-wrap">
-                                <div className="flex items-center gap-1 w-1/2">
-                                    <img src={LocalIcon} alt="" />
-                                    <p className="text-m">São Paulo</p>
-                                </div>
-                                <div className="flex items-center gap-1 w-1/3">
-                                    <img src={WorkTipe} alt="" />
-                                    <p className="text-m ">Presencial</p>
-                                </div>
-                                <div className="flex items-center gap-1 w-1/2">
-                                    <img src={IconContratio} alt="" />
-                                    <p className="text-m">CLT</p>
-                                </div>
-                            </div>
-                            <p className="text-sm mt-4">Publicada em: 01/01/2025</p>
-                            <div className="mt-6 flex gap-2 items-center w-full">
-                                <Button variant="primary" className="px-5 py-[8px] w-[170px]">
-                                    <p className="font-mont text-white font-bold text-sm">VER DETALHES</p>
-                                </Button>
-                                <a href="" className="flex items-center">
-                                    <img src={shareIcon} alt="" />
-                                    <p className="font-mont font-medium text-sm">Compartilhar</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div className="w-[350px] border-[1px] border-solid border-transparent-gray rounded-lg p-4">
-                            <h1 className="text-m font-mont text-light-blue font-semibold mb-0">Desenvolvedor(a) Front-End</h1>
-                            <h3 className="m-0 font-mont text-gray font-medium">Pleno</h3>
-                            <div className="flex w-full gap-4 mt-3 flex-wrap">
-                                <div className="flex items-center gap-1 w-1/2">
-                                    <img src={LocalIcon} alt="" />
-                                    <p className="text-m">São Paulo</p>
-                                </div>
-                                <div className="flex items-center gap-1 w-1/3">
-                                    <img src={WorkTipe} alt="" />
-                                    <p className="text-m ">Presencial</p>
-                                </div>
-                                <div className="flex items-center gap-1 w-1/2">
-                                    <img src={IconContratio} alt="" />
-                                    <p className="text-m">CLT</p>
-                                </div>
-                            </div>
-                            <p className="text-sm mt-4">Publicada em: 01/01/2025</p>
-                            <div className="mt-6 flex gap-2 items-center w-full">
-                                <Button variant="primary" className="px-5 py-[8px] w-[170px]">
-                                    <p className="font-mont text-white font-bold text-sm">VER DETALHES</p>
-                                </Button>
-                                <a href="" className="flex items-center">
-                                    <img src={shareIcon} alt="" />
-                                    <p className="font-mont font-medium text-sm">Compartilhar</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div className="w-[350px] border-[1px] border-solid border-transparent-gray rounded-lg p-4">
-                            <h1 className="text-m font-mont text-light-blue font-semibold mb-0">Desenvolvedor(a) Front-End</h1>
-                            <h3 className="m-0 font-mont text-gray font-medium">Pleno</h3>
-                            <div className="flex w-full gap-4 mt-3 flex-wrap">
-                                <div className="flex items-center gap-1 w-1/2">
-                                    <img src={LocalIcon} alt="" />
-                                    <p className="text-m">São Paulo</p>
-                                </div>
-                                <div className="flex items-center gap-1 w-1/3">
-                                    <img src={WorkTipe} alt="" />
-                                    <p className="text-m ">Presencial</p>
-                                </div>
-                                <div className="flex items-center gap-1 w-1/2">
-                                    <img src={IconContratio} alt="" />
-                                    <p className="text-m">CLT</p>
-                                </div>
-                            </div>
-                            <p className="text-sm mt-4">Publicada em: 01/01/2025</p>
-                            <div className="mt-6 flex gap-2 items-center w-full">
-                                <Button variant="primary" className="px-5 py-[8px] w-[170px]">
-                                    <p className="font-mont text-white font-bold text-sm">VER DETALHES</p>
-                                </Button>
-                                <a href="" className="flex items-center">
-                                    <img src={shareIcon} alt="" />
-                                    <p className="font-mont font-medium text-sm">Compartilhar</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div className="w-[350px] border-[1px] border-solid border-transparent-gray rounded-lg p-4">
-                            <h1 className="text-m font-mont text-light-blue font-semibold mb-0">Desenvolvedor(a) Front-End</h1>
-                            <h3 className="m-0 font-mont text-gray font-medium">Pleno</h3>
-                            <div className="flex w-full gap-4 mt-3 flex-wrap">
-                                <div className="flex items-center gap-1 w-1/2">
-                                    <img src={LocalIcon} alt="" />
-                                    <p className="text-m">São Paulo</p>
-                                </div>
-                                <div className="flex items-center gap-1 w-1/3">
-                                    <img src={WorkTipe} alt="" />
-                                    <p className="text-m ">Presencial</p>
-                                </div>
-                                <div className="flex items-center gap-1 w-1/2">
-                                    <img src={IconContratio} alt="" />
-                                    <p className="text-m">CLT</p>
-                                </div>
-                            </div>
-                            <p className="text-sm mt-4">Publicada em: 01/01/2025</p>
-                            <div className="mt-6 flex gap-2 items-center w-full">
-                                <Button variant="primary" className="px-5 py-[8px] w-[170px]">
-                                    <p className="font-mont text-white font-bold text-sm">VER DETALHES</p>
-                                </Button>
-                                <a href="" className="flex items-center">
-                                    <img src={shareIcon} alt="" />
-                                    <p className="font-mont font-medium text-sm">Compartilhar</p>
-                                </a>
-                            </div>
-                        </div>
+                            {vagas && showVagas(vagas)}
                     </div>
-
-
+                    <div className="w-full flex justify-end mt-8"> 
+                    <Stepper setCurrentStep={setCurrentStep} qtdSteps={15} currentStep={currentStep}/>
+                    </div>
                 </div>
             </div>
         </>
