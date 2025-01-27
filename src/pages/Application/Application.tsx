@@ -3,11 +3,11 @@ import { useStep } from '../../contexts/StepContext';
 import Stepper from '../../components/Stepper';
 import { FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { GrPrevious } from 'react-icons/gr';
-import AdditionalData from './additionalData';
 import MyInformations from './MyInformations';
 import MyExperiences from './MyExperiences';
 import MySkills from './MySkills';
 import ReviewData from './ReviewData';
+import AdditionalData from './AdditionalData';
 
 enum Step {
   AdditionalData = 0,
