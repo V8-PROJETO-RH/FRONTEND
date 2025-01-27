@@ -431,198 +431,198 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">  import React, { useState } from "react";
-  import { useForm, SubmitHandler } from "react-hook-form";
-  import CustomInput from "../../components/Input";
-  import Button from "../../components/Button";
-  import { VscArrowRight } from "react-icons/vsc";
-  import AuthService from "../../services/Auth/authservice";
-  import {FormInputs} from "./types"
-  import { Link } from 'react-router-dom';
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import CustomInput from "../../components/Input";
+import Button from "../../components/Button";
+import { VscArrowRight } from "react-icons/vsc";
+import AuthService from "../../services/Auth/authservice";
+import { FormInputs } from "./types"
+import { Link } from 'react-router-dom';
 &nbsp;
-  const LoginComponent: React.FC = () =&gt; {
-    const { register, handleSubmit, formState: { errors } } = useForm&lt;FormInputs&gt;({
-      mode: "onChange", 
-    });
+const LoginComponent: React.FC = () =&gt; {
+  const { register, handleSubmit, formState: { errors } } = useForm&lt;FormInputs&gt;({
+    mode: "onChange",
+  });
 &nbsp;
-    const [error, setError] = useState&lt;string | null&gt;(null);
+  const [error, setError] = useState&lt;string | null&gt;(null);
 &nbsp;
-    const onSubmit: SubmitHandler&lt;FormInputs&gt; = <span class="fstat-no" title="function not covered" >async </span>(data) =&gt; {
-<span class="cstat-no" title="statement not covered" >      try {</span>
-<span class="cstat-no" title="statement not covered" >        await AuthService.login(data);</span>
-      } catch (err: any) {
-<span class="cstat-no" title="statement not covered" >        setError(err.message);</span>
-      }
-    };
+  const onSubmit: SubmitHandler&lt;FormInputs&gt; = <span class="fstat-no" title="function not covered" >async </span>(data) =&gt; {
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >      await AuthService.login(data);</span>
+    } catch (err: any) {
+<span class="cstat-no" title="statement not covered" >      setError(err.message);</span>
+    }
+  };
 &nbsp;
-    return (
-      &lt;section className="max-w-full min-h-screen flex flex-col mx-auto overflow-hidden"&gt;
-        &lt;div className="flex flex-row justify-center h-screen"&gt;
-          &lt;div className="hidden md:flex w-1/2"&gt;
-            &lt;img
-              src="../src/assets/login2.png"
-              alt="Login"
-              className="w-[72%] h-full object-cover"
-            /&gt;
+  return (
+    &lt;section className="max-w-full min-h-screen flex flex-col mx-auto overflow-hidden"&gt;
+      &lt;div className="flex flex-row justify-center h-screen"&gt;
+        &lt;div className="hidden md:flex w-1/2"&gt;
+          &lt;img
+            src="../src/assets/login2.png"
+            alt="Login"
+            className="w-[72%] h-full object-cover"
+          /&gt;
+        &lt;/div&gt;
+&nbsp;
+        &lt;div className="flex flex-col justify-center w-full md:w-1/2 px-14"&gt;
+          &lt;div className="flex flex-col space-y-4"&gt;
+            &lt;h2 className="text-2xl font-mont font-bold text-[#0360DC]"&gt;LOGIN&lt;/h2&gt;
+            &lt;p className="text-sm font-mont text-[#475569]"&gt;
+              Faça login ou registre-se para acessar a plataforma V8 Tech.
+            &lt;/p&gt;
           &lt;/div&gt;
 &nbsp;
-          &lt;div className="flex flex-col justify-center w-full md:w-1/2 px-14"&gt;
-            &lt;div className="flex flex-col space-y-4"&gt;
-              &lt;h2 className="text-2xl font-mont font-bold text-[#0360DC]"&gt;LOGIN&lt;/h2&gt;
-              &lt;p className="text-sm font-mont text-[#475569]"&gt;
-                Faça login ou registre-se para acessar a plataforma V8 Tech.
-              &lt;/p&gt;
+          &lt;form className="mt-10 w-[80%] space-y-4" onSubmit={handleSubmit(onSubmit)}&gt;
+            &lt;div&gt;
+              &lt;CustomInput
+                label="E-mail"
+                type="text"
+                placeholder="Digite seu e-mail"
+                hasError={!!errors.email}
+                {...register("email", {
+                  required: "E-mail é obrigatório",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Formato de e-mail inválido",
+                  },
+                })}
+              /&gt;
+              {errors.email &amp;&amp; (
+<span class="branch-1 cbranch-no" title="branch not covered" >                &lt;p className="text-red-500 font-bold font-mont mt-1 text-xs"&gt;</span>
+                  {errors.email.message}
+                &lt;/p&gt;
+              )}
             &lt;/div&gt;
 &nbsp;
-            &lt;form className="mt-10 w-[80%] space-y-4" onSubmit={handleSubmit(onSubmit)}&gt;
-              &lt;div&gt;
-                &lt;CustomInput
-                  label="E-mail"
-                  type="text"
-                  placeholder="Digite seu e-mail"
-                  hasError={!!errors.email}
-                  {...register("email", {
-                    required: "E-mail é obrigatório",
-                    pattern: {
-                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: "Formato de e-mail inválido",
-                    },
-                  })}
+            &lt;div&gt;
+              &lt;CustomInput
+                label="Senha"
+                type="password"
+                placeholder="Digite sua senha"
+                hasError={!!errors.senha}
+                {...register("senha", {
+                  required: "Senha é obrigatória",
+                  minLength: {
+                    value: 8,
+                    message: "Senha deve ter no mínimo 8 caracteres",
+                  },
+                  validate: {
+                    hasNumber: <span class="fstat-no" title="function not covered" >(v</span>alue) =&gt;
+<span class="cstat-no" title="statement not covered" >                      /\d/.test(value) || "Senha deve conter pelo menos um número",</span>
+                    hasSpecialChar: <span class="fstat-no" title="function not covered" >(v</span>alue) =&gt;
+<span class="cstat-no" title="statement not covered" >                      /[!@#$%^&amp;*]/.test(value) || "Senha deve conter pelo menos um caractere especial",</span>
+                  },
+                })}
+              /&gt;
+              {errors.senha &amp;&amp; (
+<span class="branch-1 cbranch-no" title="branch not covered" >                &lt;p className="text-red-500 font-bold font-mont mt-1 text-xs"&gt;</span>
+                  {errors.senha.message}
+                &lt;/p&gt;
+              )}
+            &lt;/div&gt;
+&nbsp;
+            {error &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >&lt;p className="text-red-500 font-bold font-mont"&gt;{error}&lt;/p&gt;}</span>
+&nbsp;
+            &lt;div className="flex justify-between items-center"&gt;
+              &lt;label className="flex items-center"&gt;
+                &lt;input
+                  type="checkbox"
+                  className="text-blue-500 border-gray-300 rounded w-4 h-4 focus:ring-blue-500"
                 /&gt;
-                {errors.email &amp;&amp; (
-<span class="branch-1 cbranch-no" title="branch not covered" >                  &lt;p className="text-red-500 font-bold font-mont mt-1 text-xs"&gt;</span>
-                    {errors.email.message}
-                  &lt;/p&gt;
-                )}
-              &lt;/div&gt;
+                &lt;span className="ml-2 text-sm text-[#2B3674]"&gt;Mantenha logado&lt;/span&gt;
+              &lt;/label&gt;
+              &lt;a href="#" className="text-sm font-bold text-blue-login underline"&gt;
+                Esqueceu sua senha?
+              &lt;/a&gt;
+            &lt;/div&gt;
 &nbsp;
+            &lt;Button
+              type="submit"
+              variant="secondary"
+              className="mt-6 w-full text-white font-mont font-bold flex items-center justify-center gap-2"
+            &gt;
+              ENTRAR
+              &lt;VscArrowRight className="text-white text-2xl" /&gt;
+            &lt;/Button&gt;
+          &lt;/form&gt;
+          &lt;div className="w-[78%] flex items-center h-10"&gt;
+            &lt;p className="mx-auto text-[#475569]"&gt;ou&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div className="w-[78%] flex items-center justify-center h-10"&gt;
+            &lt;div className="w-[30%] flex justify-around"&gt;
               &lt;div&gt;
-                &lt;CustomInput
-                  label="Senha"
-                  type="password"
-                  placeholder="Digite sua senha"
-                  hasError={!!errors.senha}
-                  {...register("senha", {
-                    required: "Senha é obrigatória",
-                    minLength: {
-                      value: 8,
-                      message: "Senha deve ter no mínimo 8 caracteres",
-                    },
-                    validate: {
-                      hasNumber: <span class="fstat-no" title="function not covered" >(v</span>alue) =&gt;
-<span class="cstat-no" title="statement not covered" >                        /\d/.test(value) || "Senha deve conter pelo menos um número",</span>
-                      hasSpecialChar: <span class="fstat-no" title="function not covered" >(v</span>alue) =&gt;
-<span class="cstat-no" title="statement not covered" >                        /[!@#$%^&amp;*]/.test(value) || "Senha deve conter pelo menos um caractere especial",</span>
-                    },
-                  })}
-                /&gt;
-                {errors.senha &amp;&amp; (
-<span class="branch-1 cbranch-no" title="branch not covered" >                  &lt;p className="text-red-500 font-bold font-mont mt-1 text-xs"&gt;</span>
-                    {errors.senha.message}
-                  &lt;/p&gt;
-                )}
+                &lt;img src="../src/assets/linkedin-icon.svg" alt="LinkedIn Logo" /&gt;
               &lt;/div&gt;
+              &lt;div&gt;
+                &lt;img src="../src/assets/google-icon.svg" alt="Google Icon" /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className="flex items-center justify-between mt-4 pt-4 w-[78%]"&gt;
+            &lt;div className="flex flex-col"&gt;
+              &lt;p className="text-[#475569]"&gt;Ainda não tem uma conta?&lt;/p&gt;
+              &lt;Link to="/register" className="text-[#0360DC] font-bold"&gt;
+                Criar conta
+              &lt;/Link&gt;
+            &lt;/div&gt;
 &nbsp;
-              {error &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >&lt;p className="text-red-500 font-bold font-mont"&gt;{error}&lt;/p&gt;}</span>
+            &lt;div className="border-l border-gray-300 h-10 mx-4"&gt;&lt;/div&gt;
 &nbsp;
-              &lt;div className="flex justify-between items-center"&gt;
-                &lt;label className="flex items-center"&gt;
-                  &lt;input
-                    type="checkbox"
-                    className="text-blue-500 border-gray-300 rounded w-4 h-4 focus:ring-blue-500"
+            &lt;div className="flex items-center"&gt;
+              &lt;p className="text-[#0360DC] font-bold mr-10"&gt;SIGA NÓS&lt;/p&gt;
+              &lt;div className="flex space-x-3"&gt;
+                &lt;a
+                  href="https://www.linkedin.com/company/v8tech/posts/?feedView=all"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                &gt;
+                  &lt;img
+                    src="../src/assets/linkedin-icon-gray.svg"
+                    alt="LinkedIn"
+                    className="w-4 h-6"
                   /&gt;
-                  &lt;span className="ml-2 text-sm text-[#2B3674]"&gt;Mantenha logado&lt;/span&gt;
-                &lt;/label&gt;
-                &lt;a href="#" className="text-sm font-bold text-blue-login underline"&gt;
-                  Esqueceu sua senha?
                 &lt;/a&gt;
-              &lt;/div&gt;
-&nbsp;
-              &lt;Button
-                type="submit"
-                variant="secondary"
-                className="mt-6 w-full text-white font-mont font-bold flex items-center justify-center gap-2"
-              &gt;
-                ENTRAR
-                &lt;VscArrowRight className="text-white text-2xl" /&gt;
-              &lt;/Button&gt;
-            &lt;/form&gt;
-            &lt;div className="w-[78%] flex items-center h-10"&gt;
-              &lt;p className="mx-auto text-[#475569]"&gt;ou&lt;/p&gt;
-            &lt;/div&gt;
-            &lt;div className="w-[78%] flex items-center justify-center h-10"&gt;
-              &lt;div className="w-[30%] flex justify-around"&gt;
-                &lt;div&gt;
-                  &lt;img src="../src/assets/linkedin-icon.svg" alt="LinkedIn Logo" /&gt;
-                &lt;/div&gt;
-                &lt;div&gt;
-                  &lt;img src="../src/assets/google-icon.svg" alt="Google Icon" /&gt;
-                &lt;/div&gt;
-              &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div className="flex items-center justify-between mt-4 pt-4 w-[78%]"&gt;
-              &lt;div className="flex flex-col"&gt;
-                &lt;p className="text-[#475569]"&gt;Ainda não tem uma conta?&lt;/p&gt;
-                &lt;Link to="/register" className="text-[#0360DC] font-bold"&gt;
-                  Criar conta
-                &lt;/Link&gt;
-              &lt;/div&gt;
-&nbsp;
-              &lt;div className="border-l border-gray-300 h-10 mx-4"&gt;&lt;/div&gt;
-&nbsp;
-              &lt;div className="flex items-center"&gt;
-                &lt;p className="text-[#0360DC] font-bold mr-10"&gt;SIGA NÓS&lt;/p&gt;
-                &lt;div className="flex space-x-3"&gt;
-                  &lt;a
-                    href="https://www.linkedin.com/company/v8tech/posts/?feedView=all"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  &gt;
-                    &lt;img
-                      src="../src/assets/linkedin-icon-gray.svg"
-                      alt="LinkedIn"
-                      className="w-4 h-6"
-                    /&gt;
-                  &lt;/a&gt;
-                  &lt;a
-                    href="https://www.instagram.com/v8tech.oficial/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  &gt;
-                    &lt;img
-                      src="../src/assets/instagram-icon-gray.svg"
-                      alt="Instagram"
-                      className="w-4 h-6"
-                    /&gt;
-                  &lt;/a&gt;
-                  &lt;a
-                    href="https://www.youtube.com/@GrupoV8"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  &gt;
-                    &lt;img
-                      src="../src/assets/youtube-icon-gray.svg"
-                      alt="YouTube"
-                      className="w-5 h-6"
-                    /&gt;
-                  &lt;/a&gt;
-                &lt;/div&gt;
+                &lt;a
+                  href="https://www.instagram.com/v8tech.oficial/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                &gt;
+                  &lt;img
+                    src="../src/assets/instagram-icon-gray.svg"
+                    alt="Instagram"
+                    className="w-4 h-6"
+                  /&gt;
+                &lt;/a&gt;
+                &lt;a
+                  href="https://www.youtube.com/@GrupoV8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                &gt;
+                  &lt;img
+                    src="../src/assets/youtube-icon-gray.svg"
+                    alt="YouTube"
+                    className="w-5 h-6"
+                  /&gt;
+                &lt;/a&gt;
               &lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
-      &lt;/section&gt;
-    );
-  };
+      &lt;/div&gt;
+    &lt;/section&gt;
+  );
+};
 &nbsp;
-  export default LoginComponent;</pre></td></tr></table></pre>
+export default LoginComponent;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-01-27T12:40:39.289Z
+                at 2025-01-27T12:52:03.809Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

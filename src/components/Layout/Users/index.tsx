@@ -1,10 +1,10 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import LogoHorizontal from '../../../assets/logo(Color)Horizontal.png';
 import ProfileIcon from '../../../assets/profileIcon.svg'
 import GlobeIcon from '../../../assets/World.svg'
 
 interface LayoutProps {
-    pageSelected: 'home' | 'alerts' | 'search' | 'applications' | 'login' | 'register';
+    pageSelected: 'home' | 'alerts' | 'search' | 'applications';
 }
 
 export default function Layout({ pageSelected }: LayoutProps) {
@@ -21,7 +21,7 @@ export default function Layout({ pageSelected }: LayoutProps) {
                         </div>
                         <div className='flex flex-row items-center gap-2'>
                             <img src={ProfileIcon} alt="" />
-                            <a className='font-mont font-medium cursor-pointer text-sm'>Login</a>
+                            <Link to="/login" className='font-mont font-medium cursor-pointer text-sm'>Login</Link>
                         </div>
                     </div>
 

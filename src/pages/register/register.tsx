@@ -60,7 +60,7 @@ const CadastroComponent: React.FC = () => {
 
       <div className="flex flex-col justify-center w-full md:w-1/2 pr-14">
         <div>
-          <h2 className="text-3xl font-mont font-bold text-[#0360DC]">CADASTRO</h2>
+          <h2 className="text-2xl font-mont font-bold text-[#0360DC]">CADASTRO</h2>
           <p className="mt-2 text-sm font-mont text-[#475569]">
             Faça login ou registre-se para acessar a plataforma V8 Tech.
           </p>

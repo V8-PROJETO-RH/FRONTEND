@@ -10,22 +10,14 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LayoutUser pageSelected='home' />}>
+        <Route path="/" element={<LayoutUser pageSelected="home" />}>
           <Route index element={<Home />} />
-
-
-        </Route>
-        <Route path="/" element={<LayoutUser pageSelected='login' />}>
-          <Route path="/login" element={<Login />} />
-
-
         </Route>
 
-        <Route path="/" element={<LayoutUser pageSelected='register' />}>
-          <Route path="/login" element={<Register />} />
 
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-        </Route>
         <Route path='/adm/jobs' element={<LayoutAdmin pageSelected='jobs' />} >
 
         </Route>
