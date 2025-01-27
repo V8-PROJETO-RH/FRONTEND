@@ -43,7 +43,7 @@ function showEmptyState() {
 }
 
 export default function ManageJobs() {
-  const { jobsList } = useManageJobs();
+  const { jobsList, redirectToCreateJob } = useManageJobs();
 
   function showJobs() {
     return jobsList!.map(job => {
@@ -54,7 +54,7 @@ export default function ManageJobs() {
           <td className="text-sm text-gray-900 font-light px-3.5 py-3 whitespace-nowrap">{job.quantidade}</td>
           <td className="text-sm text-gray-900 font-light px-3.5 py-3 whitespace-nowrap">{job.responsavel}</td>
           <td className="text-sm text-gray-900 font-light px-3.5 py-3 whitespace-nowrap">{job.status}</td>
-          <td className="text-sm text-gray-900 font-light px-3.5 py-3 whitespace-nowrap"><Link className="hover:text-azul-tecnologia" to="/adm/manageJob/edit">Editar</Link></td>
+          <td className="text-sm text-gray-900 font-light px-3.5 py-3 whitespace-nowrap"><Link className="text-azul-tecnologia" to={`/adm/manageJob/edit/${job.id}`}>Editar</Link></td>
         </tr>
       );
     });
@@ -71,32 +71,32 @@ export default function ManageJobs() {
       </div>
 
       <div className="mt-6 flex justify-between items-center">
-        <CustomInput placeholder="Buscar vagas" />
+        <CustomInput id="filter" placeholder="Buscar vagas" label="Filtro:" />
 
-        <Button variant="primary" className="h-min text-sm font-medium mr-3">+ Nova vaga</Button>
+        <Button variant="primary" className="h-min text-sm font-medium mr-3" onClick={redirectToCreateJob}>+ Nova vaga</Button>
       </div>
 
       <div className="flex flex-col mx-3">
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-              <div className="overflow-hidden">
-                  <table className="min-w-full">
-                      <thead className="border-b">
-                          <tr>
-                              <th scope="col" className="text-sm font-medium text-gray-900 px-3 py-3.5 text-left">ID</th>
-                              <th scope="col" className="text-sm font-medium text-gray-900 px-3 py-3.5 text-left">Nome</th>
-                              <th scope="col" className="text-sm font-medium text-gray-900 px-3 py-3.5 text-left">Quantidade</th>
-                              <th scope="col" className="text-sm font-medium text-gray-900 px-3 py-3.5 text-left">Responsável</th>
-                              <th scope="col" className="text-sm font-medium text-gray-900 px-3 py-3.5 text-left">Estado</th>
-                              <th scope="col" className="text-sm font-medium text-gray-900 px-3 py-3.5 text-left">Ações</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                        {renderTableItems()}
-                      </tbody>
-                  </table>
-              </div>
+            <div className="overflow-hidden">
+              <table className="min-w-full">
+                <thead className="border-b">
+                  <tr>
+                    <th scope="col" className="text-sm font-medium text-gray-900 px-3 py-3.5 text-left">ID</th>
+                    <th scope="col" className="text-sm font-medium text-gray-900 px-3 py-3.5 text-left">Nome</th>
+                    <th scope="col" className="text-sm font-medium text-gray-900 px-3 py-3.5 text-left">Quantidade</th>
+                    <th scope="col" className="text-sm font-medium text-gray-900 px-3 py-3.5 text-left">Responsável</th>
+                    <th scope="col" className="text-sm font-medium text-gray-900 px-3 py-3.5 text-left">Estado</th>
+                    <th scope="col" className="text-sm font-medium text-gray-900 px-3 py-3.5 text-left">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {renderTableItems()}
+                </tbody>
+              </table>
             </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import getAllJobs from "../../service/job/jobs";
 import { JobManagement } from "../../types/job";
+import { useNavigate } from "react-router-dom";
 
 export default function useManageJobs() {
+
+  const navigate = useNavigate();
+
   const [jobsList, setJobsList] = useState<JobManagement[]>();
 
   useEffect(() => {
@@ -28,5 +32,9 @@ export default function useManageJobs() {
     setJobs();
   }, []);
 
-  return { jobsList };
+  function redirectToCreateJob() {
+    return navigate("/adm/manageJob/create");
+  }
+
+  return { jobsList, redirectToCreateJob };
 }
