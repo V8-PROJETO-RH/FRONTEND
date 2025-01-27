@@ -12,11 +12,17 @@ interface SelectProps {
   onChange: (value: string) => void;
   labelClassName?: string;
   optionClassName?: string;
+  placeholder?: string; // Nova prop para o placeholder
 }
 
-  
-
-const Select: React.FC<SelectProps> = ({ label, options, onChange, labelClassName, optionClassName }) => {
+const Select: React.FC<SelectProps> = ({
+  label,
+  options,
+  onChange,
+  labelClassName,
+  optionClassName,
+  placeholder = 'Selecione uma opção', // Valor padrão para o placeholder
+}) => {
   const [selectedValue, setSelectedValue] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -27,15 +33,15 @@ const Select: React.FC<SelectProps> = ({ label, options, onChange, labelClassNam
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen px-4">
-      <div className="relative w-full max-w-md bg-custom-background-select rounded border border-gray-300">
+      <div className="relative w-full max-w-md bg-custom-background-select rounded border border-medium-gray">
         {label && <div className={`text-custom-text-select-blue mb-1 pl-2 ${labelClassName}`}>{label}</div>}
         <select
           value={selectedValue}
           onChange={handleChange}
-          className="w-full text-custom-text-select-gray p-2 bg-custom-background-select text-gray-500 bg-white rounded border-none focus:outline-none appearance-none"
+          className="w-full text-custom-text-select-gray p-2 bg-custom-background-select text-gray-500 rounded focus:outline-none appearance-none"
         >
           <option value="" disabled>
-            Selecione o local
+            {placeholder}
           </option>
           {options.map((option) => (
             <option key={option.id} value={option.name} className={optionClassName}>

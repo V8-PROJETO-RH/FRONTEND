@@ -23,7 +23,7 @@ const AuthService = {
   },
 
   register: async (data: RegisterData): Promise<RegisterResponse> => {
-    const response = await fetch(`${API_URL}/register`, { // Certifique-se que o endpoint esteja correto
+    const response = await fetch(`${API_URL}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -23,11 +23,7 @@ interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   hasError?: boolean;
 }
 
-const sizeClasses = {
-  small: "text-sm max-w-sm",
-  medium: "text-md max-w-md",
-  large: "text-lg max-w-full",
-};
+
 
 const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
   (

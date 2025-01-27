@@ -11,7 +11,6 @@ function App() {
         {/* Rota para Login */}
         <Route path="/login" element={<Login />} />
         <Route path='/register' element={<Register />} />
-       
         <Route path="/" element={<Layout pageSelected="home" />} />
       </Routes>
     </Router>

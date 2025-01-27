@@ -5,6 +5,7 @@ import Button from "../../components/Button";
 import { VscArrowRight } from "react-icons/vsc";
 import AuthService from "../../services/Auth/authservice";
 import { FormInputs } from "../login/types";
+import { Link } from "react-router-dom";
 
 type CadastroInputs = FormInputs & {
   nome: string;
@@ -14,8 +15,8 @@ type CadastroInputs = FormInputs & {
 };
 
 const CadastroComponent: React.FC = () => {
-  const { register, handleSubmit, formState: { errors }, watch } = useForm<CadastroInputs>({
-    mode: "onChange",
+  const { register, handleSubmit, formState: { errors }, watch, setValue, clearErrors } = useForm<CadastroInputs>({
+    mode: "onChange", 
   });
 
   const [error, setError] = useState<string | null>(null);
@@ -30,6 +31,23 @@ const CadastroComponent: React.FC = () => {
 
   const senha = watch("senha");
 
+  const formatarCPF = (cpf: string) => {
+    const apenasNumeros = cpf.replace(/\D/g, "");
+    return apenasNumeros
+      .substring(0, 11)
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d{2})$/, "$1-$2");
+  };
+
+  const formatarData = (data: string) => {
+    const apenasNumeros = data.replace(/\D/g, "");
+    return apenasNumeros
+      .substring(0, 8)
+      .replace(/(\d{2})(\d)/, "$1/$2")
+      .replace(/(\d{2})(\d)/, "$1/$2");
+  };
+
   return (
     <section className="max-w-full min-h-screen flex">
       <div className="hidden md:flex w-1/2 bg-gradient-to-r from-blue-700 to-green-500">
@@ -41,7 +59,7 @@ const CadastroComponent: React.FC = () => {
       </div>
 
       <div className="flex flex-col justify-center w-full md:w-1/2 pr-14">
-        <div className="">
+        <div>
           <h2 className="text-3xl font-mont font-bold text-[#0360DC]">CADASTRO</h2>
           <p className="mt-2 text-sm font-mont text-[#475569]">
             Faça login ou registre-se para acessar a plataforma V8 Tech.
@@ -87,18 +105,26 @@ const CadastroComponent: React.FC = () => {
             </div>
 
             <div>
-              <CustomInput
-                label="CPF"
+              <label htmlFor="cpf" className="block text-sm font-mont">CPF</label>
+              <input
                 type="text"
+                id="cpf"
                 placeholder="000.000.000-00"
-                hasError={!!errors.cpf}
+                maxLength={14}
                 {...register("cpf", {
                   required: "CPF é obrigatório",
-                  pattern: {
-                    value: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
-                    message: "Formato de CPF inválido",
+                  validate: {
+                    pattern: (value) => /^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(value) || "Formato de CPF inválido",
                   },
+                  onChange: (e) => {
+                    e.target.value = formatarCPF(e.target.value);
+                    setValue("cpf", e.target.value);
+                    if (e.target.value.match(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)) {
+                      clearErrors("cpf");
+                    }
+                  }
                 })}
+                className={`mt-1 p-2 border ${errors.cpf ? "border-red-500" : "border-gray-300"} rounded-lg w-full outline-none`}
               />
               {errors.cpf && (
                 <p className="text-red-500 font-bold font-mont mt-1 text-xs">
@@ -108,13 +134,23 @@ const CadastroComponent: React.FC = () => {
             </div>
 
             <div>
-              <CustomInput
-                label="Data de Nascimento"
-                type="date"
-                hasError={!!errors.dataNascimento}
+              <label htmlFor="dataNascimento" className="block text-sm font-mont">Data de Nascimento</label>
+              <input
+                type="text"
+                id="dataNascimento"
+                placeholder="DD/MM/AAAA"
+                maxLength={10}
                 {...register("dataNascimento", {
                   required: "Data de nascimento é obrigatória",
+                  validate: {
+                    pattern: (value) => /^\d{2}\/\d{2}\/\d{4}$/.test(value) || "Formato de data inválido",
+                  },
+                  onChange: (e) => {
+                    e.target.value = formatarData(e.target.value);
+                    setValue("dataNascimento", e.target.value);
+                  },
                 })}
+                className={`mt-1 p-2 border ${errors.dataNascimento ? "border-red-500" : "border-gray-300"} rounded-lg w-full outline-none`}
               />
               {errors.dataNascimento && (
                 <p className="text-red-500 font-bold font-mont mt-1 text-xs">
@@ -169,14 +205,14 @@ const CadastroComponent: React.FC = () => {
             <Button
               type="submit"
               variant="secondary"
-              className="w-full md:w-1/2 bg-[#0360DC] text-white font-mont font-bold flex items-center justify-center gap-2"
+              className="w-full md:w-[72%] bg-[#0360DC] text-white font-mont font-bold flex items-center justify-center gap-2"
             >
-              ENTRAR
+              CADASTRAR
               <VscArrowRight className="text-white text-2xl" />
             </Button>
 
             <p className="mt-4 text-sm font-mont text-[#475569]">
-              Já possui uma conta? <a href="#" className="text-[#0360DC] font-bold">Entrar</a>
+              Já possui uma conta? <Link to="/login" className="text-[#0360DC] font-bold">Entrar</Link>
             </p>
           </div>
         </form>

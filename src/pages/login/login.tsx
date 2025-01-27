@@ -4,11 +4,12 @@ import CustomInput from "../../components/Input";
 import Button from "../../components/Button";
 import { VscArrowRight } from "react-icons/vsc";
 import AuthService from "../../services/Auth/authservice";
-import {FormInputs} from "./types"
+import { FormInputs } from "./types"
+import { Link } from 'react-router-dom';
 
 const LoginComponent: React.FC = () => {
-  const { register, handleSubmit, formState: { errors }, trigger } = useForm<FormInputs>({
-    mode: "onChange", 
+  const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>({
+    mode: "onChange",
   });
 
   const [error, setError] = useState<string | null>(null);
@@ -129,9 +130,9 @@ const LoginComponent: React.FC = () => {
           <div className="flex items-center justify-between mt-4 pt-4 w-[78%]">
             <div className="flex flex-col">
               <p className="text-[#475569]">Ainda não tem uma conta?</p>
-              <a href="#" className="text-[#0360DC] font-bold">
+              <Link to="/register" className="text-[#0360DC] font-bold">
                 Criar conta
-              </a>
+              </Link>
             </div>
 
             <div className="border-l border-gray-300 h-10 mx-4"></div>

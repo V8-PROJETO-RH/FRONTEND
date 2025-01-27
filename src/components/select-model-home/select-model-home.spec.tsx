@@ -23,8 +23,9 @@ describe('Select Component', () => {
     const handleChange = jest.fn();
     render(<Select label="Select a location" options={options} onChange={handleChange} />);
     
-   
+  
     fireEvent.change(screen.getByRole('combobox'), { target: { value: 'Opção 2' } });
+
     expect(handleChange).toHaveBeenCalledTimes(1);
     expect(handleChange).toHaveBeenCalledWith('Opção 2');
   });
@@ -40,10 +41,9 @@ describe('Select Component', () => {
       />
     );
 
-
+  
     expect(screen.getByText('Select a location')).toHaveClass('custom-label');
 
-  
     options.forEach(option => {
       expect(screen.getByText(option.name)).toHaveClass('custom-option');
     });
@@ -52,8 +52,13 @@ describe('Select Component', () => {
   test('displays IoIosArrowDown icon', () => {
     render(<Select label="Select a location" options={options} onChange={() => {}} />);
     
-  
+    // Check if the dropdown icon is rendered
     const icon = screen.getByTestId('dropdown-icon');
     expect(icon).toBeInTheDocument();
+  });
+
+  test('displays placeholder text when no option is selected', () => {
+    render(<Select label="Select a location" options={options} onChange={() => {}} />);
+    expect(screen.getByText('Selecione uma opção')).toBeInTheDocument();
   });
 });
