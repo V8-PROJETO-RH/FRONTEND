@@ -1,5 +1,3 @@
-// CustomInput.spec.tsx
-
 import { render, screen, fireEvent } from '@testing-library/react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import CustomInput from './index';
@@ -11,6 +9,18 @@ describe('CustomInput component', () => {
     expect(inputContainer).toHaveClass('bg-red-500');
   });
 
+  test('renders with the correct input size', () => {
+    render(<CustomInput label="Email" inputSize="small" id="email-input" />);
+    const container = screen.getByText('Email').parentElement;
+    expect(container).toHaveClass('text-sm');
+  });
+
+  test('applies the correct font label weight', () => {
+    render(<CustomInput label="Email" fontLabel="bold" id="email-input" />);
+    const label = screen.getByText('Email');
+    expect(label).toHaveClass('font-bold');
+  });
+
   test('shows suggestions when typing', () => {
     const suggestions = ['React', 'Angular', 'Vue'];
     render(<CustomInput label="Search" isSearch={true} suggestions={suggestions} id="search-input" />);
@@ -19,6 +29,47 @@ describe('CustomInput component', () => {
     fireEvent.change(input, { target: { value: 'Re' } });
     
     expect(screen.getByText(/react/i)).toBeInTheDocument();
+  });
+
+  test('adds selected items when enableSelect is true', () => {
+    render(<CustomInput label="Select" enableSelect={true} id="select-input" />);
+    
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'Item1' } });
+    fireEvent.keyUp(input, { key: 'Enter', code: 'Enter' });
+
+    expect(screen.getByText(/item1/i)).toBeInTheDocument();
+
+    fireEvent.change(input, { target: { value: 'Item2' } });
+    fireEvent.keyUp(input, { key: 'Enter', code: 'Enter' });
+
+    expect(screen.getByText(/item2/i)).toBeInTheDocument();
+  });
+
+  test('removes selected items when clicking on remove icon', () => {
+    render(<CustomInput label="Select" enableSelect={true} id="select-input" />);
+    
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'Item1' } });
+    fireEvent.keyUp(input, { key: 'Enter', code: 'Enter' });
+
+    const removeIcon = screen.getByRole('button', { name: /remove/i });
+    fireEvent.click(removeIcon);
+
+    expect(screen.queryByText(/item1/i)).not.toBeInTheDocument();
+  });
+
+  test('handles clicking on a suggestion', () => {
+    const suggestions = ['React', 'Angular', 'Vue'];
+    render(<CustomInput label="Search" isSearch={true} suggestions={suggestions} id="search-input" />);
+    
+    const input = screen.getByRole('textbox');
+    fireEvent.change(input, { target: { value: 'Re' } });
+
+    const suggestion = screen.getByText(/react/i);
+    fireEvent.click(suggestion);
+
+    expect(screen.queryByText(/react/i)).not.toBeInTheDocument();
   });
 
   test('opens dropdown with icon click (toggleDropdownIcon)', () => {
@@ -76,30 +127,6 @@ describe('CustomInput component', () => {
     fireEvent.click(toggleButton);
 
     expect(input).toHaveAttribute('type', 'password');
-  });
-
-  test('adds selected item on Enter key press', () => {
-    render(<CustomInput label="Input" isSearch={true} id="custom-input" />);
-
-    const input = screen.getByRole('textbox');
-    fireEvent.change(input, { target: { value: 'NewItem' } });
-    fireEvent.keyUp(input, { key: 'Enter', code: 'Enter' });
-
-    expect(screen.getByText(/newitem/i)).toBeInTheDocument();
-  });
-
-  test('removes selected item when clicking on remove icon', () => {
-    const suggestions = ['Item1', 'Item2'];
-    render(<CustomInput label="Input" isSearch={true} suggestions={suggestions} id="removable-item-input" />);
-
-    const input = screen.getByRole('textbox');
-    fireEvent.change(input, { target: { value: 'Item1' } });
-    fireEvent.keyUp(input, { key: 'Enter', code: 'Enter' });
-
-    const removeIcon = screen.getByRole('button', { name: /remove/i });
-    fireEvent.click(removeIcon);
-
-    expect(screen.queryByText(/item1/i)).not.toBeInTheDocument();
   });
 
   test('clears input when clear icon is clicked', () => {

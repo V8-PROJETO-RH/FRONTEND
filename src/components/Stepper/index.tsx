@@ -11,12 +11,12 @@ const Step: React.FC<StepProps> = ({ label, isActive, isCompleted, isLastStep })
   <div className="relative flex items-center">
     <div className="flex flex-col items-center">
       <div
-        className={`flex-shrink-0 w-7 h-7 rounded-full border-2 flex items-center justify-center z-10 ${
+        className={`flex-shrink-0 w-[30px] h-[30px] rounded-full border-2 flex items-center justify-center z-10 ${
           isCompleted ? 'border-light-blue bg-white' : 'border-gray bg-white'
         }`}
       >
         <div
-          className={`w-4 h-4 rounded-full ${
+          className={`w-[18px] h-[18px] rounded-full ${
             isActive || isCompleted ? 'bg-light-blue' : 'bg-transparent'
           }`}
         />
@@ -31,7 +31,7 @@ const Step: React.FC<StepProps> = ({ label, isActive, isCompleted, isLastStep })
     </div>
     <span
       className={`ml-2 ${
-        isActive || isCompleted ? 'text-light-blue font-semibold text-md uppercase' : 'text-gray font-semibold text-md uppercase'
+        isActive || isCompleted ? 'text-light-blue font-semibold text-xs uppercase' : 'text-gray font-semibold text-xs uppercase'
       }`}
     >
       {label}
@@ -45,7 +45,7 @@ interface StepperProps {
 }
 
 const Stepper: React.FC<StepperProps> = ({ steps, currentStep }) => (
-  <div className="flex flex-col justify-between h-[362px] ml-4">
+  <div className="flex flex-col justify-between h-[362px] ml-4 w-fit">
     {steps.map((label, index) => (
       <Step
         key={index}
