@@ -2,6 +2,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LayoutUser from './components/Layout/Users';
 import LayoutAdmin from './components/Layout/Admin';
 import Home from './pages/Home';
+import React from 'react';
+import Login from '../src/pages/login/login';
+import Register from './pages/register/register';
 
 function App() {
   return (
@@ -10,8 +13,19 @@ function App() {
         <Route path="/" element={<LayoutUser pageSelected='home' />}>
           <Route index element={<Home />} />
 
+
+        </Route>
+        <Route path="/" element={<LayoutUser pageSelected='login' />}>
+          <Route path="/login" element={<Login />} />
+
+
         </Route>
 
+        <Route path="/" element={<LayoutUser pageSelected='register' />}>
+          <Route path="/login" element={<Register />} />
+
+
+        </Route>
         <Route path='/adm/jobs' element={<LayoutAdmin pageSelected='jobs' />} >
 
         </Route>

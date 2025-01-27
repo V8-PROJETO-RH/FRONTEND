@@ -21,7 +21,9 @@ export default {
       'secundary-gray': '#4A4A4A',
       'dark-blue': '#002C63',
       'black-transparent': 'rgba(0, 0, 0, 0.2)',
-      'black': '#00000'
+      'black': '#00000',
+      'blue-login': '#002A7B',
+      'red-500': '#ef4444', 
     },
     fontFamily: {
       mont: ['Montserrat', 'sans-serif'],
@@ -35,4 +37,3 @@ export default {
   },
   plugins: [],
 }
-

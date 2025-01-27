@@ -4,7 +4,7 @@ import ProfileIcon from '../../../assets/profileIcon.svg'
 import GlobeIcon from '../../../assets/World.svg'
 
 interface LayoutProps {
-    pageSelected: 'home' | 'alerts' | 'search' | 'applications';
+    pageSelected: 'home' | 'alerts' | 'search' | 'applications' | 'login' | 'register';
 }
 
 export default function Layout({ pageSelected }: LayoutProps) {
