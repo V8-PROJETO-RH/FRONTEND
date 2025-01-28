@@ -16,3 +16,9 @@ export interface Job {
 }
 
 export type JobManagement = Pick<Job, "id" | "nome" | "quantidade" | "responsavel" | "status">
+
+export interface JobRequest {
+  vagas: Job[],
+  totalElements: number,
+  totalPages: number,
+}

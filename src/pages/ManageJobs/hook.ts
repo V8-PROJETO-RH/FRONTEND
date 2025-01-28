@@ -4,6 +4,9 @@ import { JobManagement } from "../../types/job";
 import { useNavigate } from "react-router-dom";
 
 export default function useManageJobs() {
+  const { innerHeight } = window;
+  const heightViewport = innerHeight / 2;
+  console.log(heightViewport);
 
   const navigate = useNavigate();
 
@@ -14,7 +17,7 @@ export default function useManageJobs() {
       const jobsData = await getAllJobs();
 
       if(jobsData) {
-        const listJobs: JobManagement[] = jobsData.map(job => {
+        const listJobs: JobManagement[] = jobsData.vagas.map(job => {
           return {
             id: job.id,
             nome: job.nome,
@@ -23,7 +26,7 @@ export default function useManageJobs() {
             status: job.status
           }
         })
-  
+
         setJobsList(listJobs);
       }
 

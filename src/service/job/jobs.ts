@@ -1,10 +1,10 @@
-import { Job } from "../../types/job";
+import { JobRequest } from "../../types/job";
 
-export default async function getAllJobs() {
-  const urlApi = "https://mocki.io/v1/964b6ae0-4b59-40e0-845b-661efe79f487"
+export default async function getJobs(page: number = 0, quantity: number = 10) {
+  const urlApi = `http://localhost:8080/crud/vagas?page=${page}&size=${quantity}`;
   try {
     const res = await fetch(urlApi);
-    const data: Job[] = await res.json();
+    const data: JobRequest = await res.json();
     return data;
   } catch (error) {
     console.error(error);
