@@ -1,11 +1,4 @@
-import React, {
-  useState,
-  KeyboardEvent,
-  InputHTMLAttributes,
-  ReactNode,
-  useRef,
-  useEffect,
-} from "react";
+import React, { useState, KeyboardEvent, InputHTMLAttributes, ReactNode, useRef, useEffect } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { IoClose } from "react-icons/io5";
 
@@ -21,6 +14,7 @@ interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   bgColor?: string;
   fontLabel?: "medium" | "semibold" | "bold";
   enableSelect?: boolean;
+  hasError?: boolean; // Adicionando a prop para lidar com erros
 }
 
 const sizeClasses = {
@@ -48,6 +42,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
   icon,
   bgColor = "bg-white",
   enableSelect = false,
+  hasError = false,
   ...props
 }) => {
   const [word, setWord] = useState("");
@@ -131,10 +126,12 @@ const CustomInput: React.FC<CustomInputProps> = ({
     };
   }, []);
 
+  const borderClass = hasError ? "border-red-500" : "border-gray-300";
+
   return (
     <div
       ref={containerRef}
-      className={`flex flex-col mb-4 relative w-full ${sizeClasses[inputSize]} ${className}`}
+      className={`flex flex-col mb-4 relative w-full  ${className}`}
     >
       <label className={`mb-2 ${fontWeightLabels[fontLabel]} text-black`}>
         {label}
@@ -155,7 +152,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
           ))}
         </div>
       )}
-      <div className={`flex items-center ${bgColor} border border-black-transparent rounded-lg px-3 py-2`}>
+      <div className={`flex items-center ${bgColor} border ${borderClass} rounded-lg px-3 py-2`}>
         <input
           {...props}
           type={type === "password" && showPassword ? "text" : type}

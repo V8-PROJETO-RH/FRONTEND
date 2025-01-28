@@ -57,7 +57,7 @@ const LoginComponent: React.FC = () => {
                 })}
               />
               {errors.email && (
-                <p className="text-red-500 font-bold font-mont mt-1 text-xs">
+                <p className="text-red-500 font-bold font-mont mt-1 text-xs w-full">
                   {errors.email.message}
                 </p>
               )}
