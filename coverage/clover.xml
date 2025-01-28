@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1738003819588" clover="3.2.0">
+  <project timestamp="1738003819588" name="All files">
+    <metrics statements="72" coveredstatements="72" conditionals="27" coveredconditionals="27" methods="18" coveredmethods="18" elements="117" coveredelements="117" complexity="0" loc="72" ncloc="72" packages="7" files="7" classes="7"/>
+    <package name="components.Checkbox">
+      <metrics statements="6" coveredstatements="6" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
+      <file name="index.tsx" path="C:\Users\LowCost\OneDrive - V8.TECH\Área de Trabalho\FRONTEND\src\components\Checkbox\index.tsx">
+        <metrics statements="6" coveredstatements="6" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="29" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="51" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="52" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.Stepper">
+      <metrics statements="6" coveredstatements="6" conditionals="14" coveredconditionals="14" methods="3" coveredmethods="3"/>
+      <file name="index.tsx" path="C:\Users\LowCost\OneDrive - V8.TECH\Área de Trabalho\FRONTEND\src\components\Stepper\index.tsx">
+        <metrics statements="6" coveredstatements="6" conditionals="14" coveredconditionals="14" methods="3" coveredmethods="3"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="18" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="48" count="6" type="stmt"/>
+        <line num="50" count="18" type="stmt"/>
+        <line num="61" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.select-filter">
+      <metrics statements="11" coveredstatements="11" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+      <file name="select-filter.tsx" path="C:\Users\LowCost\OneDrive - V8.TECH\Área de Trabalho\FRONTEND\src\components\select-filter\select-filter.tsx">
+        <metrics statements="11" coveredstatements="11" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="5" type="stmt"/>
+        <line num="18" count="5" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="24" count="5" type="stmt"/>
+        <line num="38" count="15" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.select-model-home">
+      <metrics statements="11" coveredstatements="11" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
+      <file name="select-model-home.tsx" path="C:\Users\LowCost\OneDrive - V8.TECH\Área de Trabalho\FRONTEND\src\components\select-model-home\select-model-home.tsx">
+        <metrics statements="11" coveredstatements="11" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="26" count="7" type="stmt"/>
+        <line num="28" count="7" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="34" count="7" type="stmt"/>
+        <line num="47" count="21" type="stmt"/>
+        <line num="61" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="contexts">
+      <metrics statements="17" coveredstatements="17" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4"/>
+      <file name="StepContext.tsx" path="C:\Users\LowCost\OneDrive - V8.TECH\Área de Trabalho\FRONTEND\src\contexts\StepContext.tsx">
+        <metrics statements="17" coveredstatements="17" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="10" type="stmt"/>
+        <line num="14" count="10" type="stmt"/>
+        <line num="22" count="10" type="stmt"/>
+        <line num="23" count="13" type="cond" truecount="1" falsecount="0"/>
+        <line num="24" count="13" type="stmt"/>
+        <line num="28" count="10" type="stmt"/>
+        <line num="29" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="34" count="10" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="42" count="15" type="stmt"/>
+        <line num="43" count="14" type="cond" truecount="1" falsecount="0"/>
+        <line num="44" count="4" type="stmt"/>
+        <line num="46" count="10" type="stmt"/>
+      </file>
+    </package>
+    <package name="services.Auth">
+      <metrics statements="14" coveredstatements="14" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <file name="authservice.ts" path="C:\Users\LowCost\OneDrive - V8.TECH\Área de Trabalho\FRONTEND\src\services\Auth\authservice.ts">
+        <metrics statements="14" coveredstatements="14" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="16" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="34" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="services.User">
+      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="userservice.ts" path="C:\Users\LowCost\OneDrive - V8.TECH\Área de Trabalho\FRONTEND\src\services\User\userservice.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

@@ -1,6 +1,14 @@
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom'; 
 
 import { TextEncoder, TextDecoder } from 'util';
 
-global.TextEncoder = TextEncoder as typeof globalThis.TextEncoder;
-global.TextDecoder = TextDecoder as typeof globalThis.TextDecoder;
+
+global.TextEncoder = global.TextEncoder || TextEncoder;
+global.TextDecoder = global.TextDecoder || TextDecoder;
+
+
+global.matchMedia = global.matchMedia || (() => ({
+  matches: false,
+  addListener: jest.fn(),
+  removeListener: jest.fn(),
+}));

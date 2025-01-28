@@ -84,7 +84,7 @@ export default function Layout({ pageSelected }: { pageSelected: PageSelected })
 
   return(
     <>
-      <div className="h-screen flex justify-between">
+      <div className="h-screen flex">
         <div className='w-1/5 p-6 shadow-lg'>
           <img src={LogoHorizontal} alt="Logo V8 TECH"/>
           <nav className="mt-12">
@@ -107,7 +107,7 @@ export default function Layout({ pageSelected }: { pageSelected: PageSelected })
           </nav>
         </div>
 
-        <div>
+        <div className="w-full">
           <Outlet />
         </div>
       </div>
