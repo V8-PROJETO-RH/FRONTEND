@@ -6,6 +6,9 @@ import React from 'react';
 import Login from '../src/pages/login/login';
 import Register from './pages/register/register';
 
+
+ 
+
 function App() {
   return (
     <Router>
