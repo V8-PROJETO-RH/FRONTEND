@@ -17,8 +17,13 @@ const LoginComponent: React.FC = () => {
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     try {
       await AuthService.login(data);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        console.error("Erro desconhecido:", err);
+        setError("Ocorreu um erro inesperado.");
+      }
     }
   };
 
