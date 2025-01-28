@@ -14,15 +14,8 @@ interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   bgColor?: string;
   fontLabel?: "medium" | "semibold" | "bold";
   enableSelect?: boolean;
-  hasError?: boolean; // Adicionando a prop para lidar com erros
+  hasError?: boolean;
 }
-
-const sizeClasses = {
-  xsmall: "text-xs max-w-xs",
-  small: "text-sm max-w-sm",
-  medium: "text-md max-w-md",
-  large: "text-lg max-w-full",
-};
 
 const fontWeightLabels = {
   medium: "font-medium",
@@ -152,32 +145,31 @@ const CustomInput: React.FC<CustomInputProps> = ({
           ))}
         </div>
       )}
-      <div className={`flex items-center ${bgColor} border ${borderClass} rounded-lg px-3 py-2`}>
+   <div className={`flex items-center ${bgColor}  border ${borderClass} rounded-lg px-3 py-2`}>
         <input
           {...props}
-          type={type === "password" && showPassword ? "text" : type}
+          type={type === "password" && !showPassword ? "password" : "text"}
           value={word}
           onChange={handleInputChange}
-          onFocus={() => isSearch && updateDropdown(word)}
-          onKeyUp={handleKeyPress}
-          className={`flex-1 ${bgColor} outline-none text-black`}
+          className={`flex-grow ${bgColor}  outline-none  text-black`}
+          placeholder="Digite sua senha"
         />
         {type === "password" && (
           <button
             type="button"
             onClick={togglePasswordVisibility}
-            className="ml-2 focus:outline-none"
+            className="ml-2 focus:outline-none "
           >
             {showPassword ? (
-              <AiOutlineEye className="w-5 h-5 text-secundary-gray" />
-            ) : (
               <AiOutlineEyeInvisible className="w-5 h-5 text-secundary-gray" />
+            ) : (
+              <AiOutlineEye className="w-5 h-5 text-secundary-gray" />
             )}
           </button>
         )}
         {enableSelect && word.length > 0 ? (
           <IoClose
-            className="w-5 h-5 text-secundary-gray ml-2 cursor-pointer"
+            className="w-5 h-5 text-secundary-gray ml-2 cursor-pointer flex-shrink-0"
             onClick={clearWord}
           />
         ) : (
@@ -185,13 +177,29 @@ const CustomInput: React.FC<CustomInputProps> = ({
             <button
               type="button"
               onClick={toggleDropdownIcon ? toggleDropdown : () => updateDropdown(word)}
-              className="ml-2 focus:outline-none"
+              className="ml-2 flex-shrink-0 focus:outline-none"
             >
               {icon}
             </button>
           )
         )}
-      </div>
+  {enableSelect && word.length > 0 ? (
+    <IoClose
+      className="w-5 h-5 text-secundary-gray ml-2 cursor-pointer flex-shrink-0"
+      onClick={clearWord}
+    />
+  ) : (
+    isSearch && (
+      <button
+        type="button"
+        onClick={toggleDropdownIcon ? toggleDropdown : () => updateDropdown(word)}
+        className="ml-2 flex-shrink-0 focus:outline-none"
+      >
+        {icon}
+      </button>
+    )
+  )}
+</div>
       {dropdownOpen && filteredSuggestions.length > 0 && (
         <ul className="scroll-custom border border-gray-300 rounded-lg mt-1 max-h-40 overflow-y-auto bg-white w-full">
           {filteredSuggestions.map((suggestion, index) => (

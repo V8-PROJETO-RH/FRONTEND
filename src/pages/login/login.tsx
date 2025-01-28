@@ -4,7 +4,7 @@ import CustomInput from "../../components/Input";
 import Button from "../../components/Button";
 import { VscArrowRight } from "react-icons/vsc";
 import AuthService from "../../services/Auth/authservice";
-import { FormInputs } from "./types"
+import { FormInputs } from "./types";
 import { Link } from 'react-router-dom';
 
 const LoginComponent: React.FC = () => {
@@ -23,17 +23,17 @@ const LoginComponent: React.FC = () => {
   };
 
   return (
-    <section className="max-w-full min-h-screen flex flex-col mx-auto overflow-hidden">
-      <div className="flex flex-row justify-center h-screen">
-        <div className="hidden md:flex w-1/2">
+    <section className="max-w-full min-h-screen flex flex-col md:flex-row lg:flex-row mx-auto overflow-hidden">
+      <div className="flex flex-row justify-center md:h-screen lg:h-screen">
+        <div className="hidden  md:flex lg:flex w-1/2">
           <img
             src="../src/assets/login2.png"
             alt="Login"
-            className="w-[72%] h-full object-cover"
+            className="lg:w-[75%] md:w-full h-full object-cover"
           />
         </div>
 
-        <div className="flex flex-col justify-center w-full md:w-1/2 px-14">
+        <div className="flex flex-col justify-center w-full md:w-[90%] lg:w-1/2 px-8 md:px-14">
           <div className="flex flex-col space-y-4">
             <h2 className="text-2xl font-mont font-bold text-[#0360DC]">LOGIN</h2>
             <p className="text-sm font-mont text-[#475569]">
@@ -41,7 +41,7 @@ const LoginComponent: React.FC = () => {
             </p>
           </div>
 
-          <form className="mt-10 w-[80%] space-y-4" onSubmit={handleSubmit(onSubmit)}>
+          <form className="mt-10 w-full md:w-[80%] space-y-4" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <CustomInput
                 label="E-mail"
@@ -114,11 +114,13 @@ const LoginComponent: React.FC = () => {
               <VscArrowRight className="text-white text-2xl" />
             </Button>
           </form>
-          <div className="w-[78%] flex items-center h-10">
-            <p className="mx-auto text-[#475569]">ou</p>
+          
+          <div className="w-full md:w-[78%] flex items-center justify-center mt-4">
+            <p className="text-[#475569]">ou</p>
           </div>
-          <div className="w-[78%] flex items-center justify-center h-10">
-            <div className="w-[30%] flex justify-around">
+          
+          <div className="w-full md:w-[78%] flex items-center justify-center h-10">
+            <div className="w-[50%] md:w-[30%] flex justify-around">
               <div>
                 <img src="../src/assets/linkedin-icon.svg" alt="LinkedIn Logo" />
               </div>
@@ -127,7 +129,8 @@ const LoginComponent: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-between mt-4 pt-4 w-[78%]">
+          
+          <div className="flex items-center justify-between mt-4 pt-4 w-full md:w-[78%] px-4 md:px-0">
             <div className="flex flex-col">
               <p className="text-[#475569]">Ainda não tem uma conta?</p>
               <Link to="/register" className="text-[#0360DC] font-bold">
@@ -138,7 +141,7 @@ const LoginComponent: React.FC = () => {
             <div className="border-l border-gray-300 h-10 mx-4"></div>
 
             <div className="flex items-center">
-              <p className="text-[#0360DC] font-bold mr-10">SIGA NÓS</p>
+              <p className="text-[#0360DC] font-bold mr-4 md:mr-10">SIGA NÓS</p>
               <div className="flex space-x-3">
                 <a
                   href="https://www.linkedin.com/company/v8tech/posts/?feedView=all"
@@ -148,7 +151,7 @@ const LoginComponent: React.FC = () => {
                   <img
                     src="../src/assets/linkedin-icon-gray.svg"
                     alt="LinkedIn"
-                    className="w-4 h-6"
+                    className="w-7 h-6"
                   />
                 </a>
                 <a
@@ -159,7 +162,7 @@ const LoginComponent: React.FC = () => {
                   <img
                     src="../src/assets/instagram-icon-gray.svg"
                     alt="Instagram"
-                    className="w-4 h-6"
+                    className="w-7 h-6"
                   />
                 </a>
                 <a
@@ -170,7 +173,7 @@ const LoginComponent: React.FC = () => {
                   <img
                     src="../src/assets/youtube-icon-gray.svg"
                     alt="YouTube"
-                    className="w-5 h-6"
+                    className="w-8 h-6"
                   />
                 </a>
               </div>

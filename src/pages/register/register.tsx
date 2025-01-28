@@ -49,30 +49,31 @@ const CadastroComponent: React.FC = () => {
   };
 
   return (
-    <section className="max-w-full min-h-screen flex">
-      <div className="hidden md:flex w-1/2 bg-gradient-to-r from-blue-700 to-green-500">
+    <section className="max-w-full min-h-screen flex flex-col md:flex-row"> 
+    <div className="hidden lg:flex w-full lg:w-1/2 bg-gradient-to-r from-blue-700 to-green-500">
         <img
           src="../src/assets/login2.png"
           alt="V8 Tech Banner"
-          className="w-[72%] h-full object-cover"
+          className="w-[80%] h-full object-cover"
         />
       </div>
 
-      <div className="flex flex-col justify-center w-full md:w-1/2 pr-14">
-        <div>
-          <h2 className="text-2xl font-mont font-bold text-[#0360DC]">CADASTRO</h2>
-          <p className="mt-2 text-sm font-mont text-[#475569]">
-            Faça login ou registre-se para acessar a plataforma V8 Tech.
-          </p>
-        </div>
+      <div className="flex flex-col justify-center w-full lg:w-1/2 p-4 lg:p-10">
+    <div className="mb-8 text-center">
+      <h2 className="text-2xl font-mont font-bold text-[#0360DC]">CADASTRO</h2>
+      <p className="mt-2 text-sm font-mont text-[#475569]">
+        Faça login ou registre-se para acessar a plataforma V8 Tech.
+      </p>
+    </div>
 
-        <form className="mt-10" onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
+          <div className="grid grid-cols-1 gap-4 font-mont max-md:grid-cols-1  md:grid-cols-2">
             <div>
               <CustomInput
                 label="Nome"
                 type="text"
                 placeholder="Inserir seu nome"
+                className="text-sm"
                 hasError={!!errors.nome}
                 {...register("nome", { required: "Nome é obrigatório" })}
               />
@@ -88,6 +89,7 @@ const CadastroComponent: React.FC = () => {
                 label="E-mail"
                 type="text"
                 placeholder="Digite seu e-mail"
+                className="text-sm"
                 hasError={!!errors.email}
                 {...register("email", {
                   required: "E-mail é obrigatório",
@@ -98,14 +100,14 @@ const CadastroComponent: React.FC = () => {
                 })}
               />
               {errors.email && (
-                <p className="text-red-500 font-bold font-mont mt-1 text-xs">
+                <p className="text-red-500 font-bold font-mont text-xs">
                   {errors.email.message}
                 </p>
               )}
             </div>
 
             <div>
-              <label htmlFor="cpf" className="block text-sm font-mont">CPF</label>
+              <label htmlFor="cpf" className="block mb-2 font-semibold font-mont">CPF</label>
               <input
                 type="text"
                 id="cpf"
@@ -124,7 +126,7 @@ const CadastroComponent: React.FC = () => {
                     }
                   }
                 })}
-                className={`mt-1 p-2 border ${errors.cpf ? "border-red-500" : "border-gray-300"} rounded-lg w-full outline-none`}
+                className={`mt-1 p-2 flex items-center text-sm border  ${errors.cpf ? "border-red-500" : "border-gray-300"} rounded-lg w-full outline-none`}
               />
               {errors.cpf && (
                 <p className="text-red-500 font-bold font-mont mt-1 text-xs">
@@ -134,7 +136,7 @@ const CadastroComponent: React.FC = () => {
             </div>
 
             <div>
-              <label htmlFor="dataNascimento" className="block text-sm font-mont">Data de Nascimento</label>
+              <label htmlFor="dataNascimento" className="block mb-2  font-semibold font-mont">Data de Nascimento</label>
               <input
                 type="text"
                 id="dataNascimento"
@@ -150,7 +152,7 @@ const CadastroComponent: React.FC = () => {
                     setValue("dataNascimento", e.target.value);
                   },
                 })}
-                className={`mt-1 p-2 border ${errors.dataNascimento ? "border-red-500" : "border-gray-300"} rounded-lg w-full outline-none`}
+                className={`mt-1 flex-col mb-4 relative px-3 py-2 flex items-center border text-sm ${errors.dataNascimento ? "border-red-500" : "border-gray-300"} rounded-lg w-full outline-none`}
               />
               {errors.dataNascimento && (
                 <p className="text-red-500 font-bold font-mont mt-1 text-xs">
@@ -164,6 +166,7 @@ const CadastroComponent: React.FC = () => {
                 label="Senha"
                 type="password"
                 placeholder="Digite sua senha"
+                className="text-sm"
                 hasError={!!errors.senha}
                 {...register("senha", {
                   required: "Senha é obrigatória",
@@ -175,7 +178,7 @@ const CadastroComponent: React.FC = () => {
                 })}
               />
               {errors.senha && (
-                <p className="text-red-500 font-bold font-mont mt-1 text-xs">
+                <p className="text-red-500 font-bold  font-mont mt-1 text-xs">
                   {errors.senha.message}
                 </p>
               )}
@@ -186,6 +189,7 @@ const CadastroComponent: React.FC = () => {
                 label="Confirmar Senha"
                 type="password"
                 placeholder="Confirme sua senha"
+                className="text-sm h-[3.0625rem]"
                 hasError={!!errors.confirmarSenha}
                 {...register("confirmarSenha", {
                   validate: value => value === senha || "As senhas não coincidem",
@@ -205,13 +209,13 @@ const CadastroComponent: React.FC = () => {
             <Button
               type="submit"
               variant="secondary"
-              className="w-full md:w-[72%] bg-[#0360DC] text-white font-mont font-bold flex items-center justify-center gap-2"
+              className="w-full bg-[#0360DC] text-white font-mont font-bold flex items-center justify-center gap-2"
             >
               CADASTRAR
               <VscArrowRight className="text-white text-2xl" />
             </Button>
 
-            <p className="mt-4 text-sm font-mont text-[#475569]">
+            <p className="mt-4 text-sm font-mont text-[#475569] text-center">
               Já possui uma conta? <Link to="/login" className="text-[#0360DC] font-bold">Entrar</Link>
             </p>
           </div>
