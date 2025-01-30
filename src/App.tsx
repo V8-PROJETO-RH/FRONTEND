@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LayoutUser from './components/Layout/Users';
 import LayoutAdmin from './components/Layout/Admin';
 import Home from './pages/Home';
-import React from 'react';
 import Login from '../src/pages/login/login';
 import Register from './pages/register/register';
 
