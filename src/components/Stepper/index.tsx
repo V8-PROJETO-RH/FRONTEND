@@ -157,4 +157,5 @@ export default function Stepper({qtdSteps, currentStep, setCurrentStep, }: Stepp
       </button>
     </div>
   );
+
 }

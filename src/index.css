@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply font-mont;
+}
+
 .scroll-custom::-webkit-scrollbar {
     width: 12px;
   }

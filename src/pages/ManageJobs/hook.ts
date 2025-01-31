@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import getJobs from "../../service/job/jobs";
+import getJobs from "../../services/Job/job";
 import { JobManagement } from "../../types/job";
 import { useNavigate } from "react-router-dom";
 

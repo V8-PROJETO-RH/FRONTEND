@@ -52,10 +52,10 @@ export default function ManageJobs() {
         <h1 className="text-2xl font-semibold">Vagas</h1>
       </div>
 
-      <div className="mt-6 flex justify-between items-center">
-        <CustomInput id="filter" placeholder="Buscar vagas" label="Filtro:" />
+      <div className="mt-6 flex justify-between items-end">
+        <CustomInput id="filter" placeholder="Buscar vagas" label="Filtro:" className="w-2/4" />
 
-        <Button variant="primary" className="h-min text-sm font-medium mr-3" onClick={redirectToCreateJob}>+ Nova vaga</Button>
+        <Button variant="primary" className="h-min text-sm font-medium mr-3 mb-4" onClick={redirectToCreateJob}>+ Nova vaga</Button>
       </div>
 
       <div className="flex flex-col mx-3 mb-3 h-[50vh]">
