@@ -3,6 +3,7 @@ import Button from "../../components/Button";
 import CustomInput from "../../components/Input";
 import useManageJobs from "./hook";
 import emptyState from "../../assets/EmptyState.svg";
+import Stepper from "../../components/Stepper";
 
 function showEmptyState() {
   return(
@@ -24,7 +25,7 @@ function showEmptyState() {
 }
 
 export default function ManageJobs() {
-  const { jobsList, redirectToCreateJob } = useManageJobs();
+  const { jobsList, redirectToCreateJob, stepper } = useManageJobs();
 
   function showJobs() {
     return jobsList!.map(job => {
@@ -79,6 +80,10 @@ export default function ManageJobs() {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="flex justify-end">
+        <Stepper currentStep={stepper.currentStep} qtdSteps={5} setCurrentStep={stepper.setCurrentStep} />
       </div>
     </div>
   );

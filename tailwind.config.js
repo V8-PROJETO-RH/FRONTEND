@@ -13,15 +13,23 @@ export default {
       'rosa-nebulosa': '#C968C8',
       'header-gray': '#F2F2F4',
       'white': '#ffffff',
-      'medium-gray':'#919192',
+      'medium-gray': '#919192',
       'custom-background-select': 'rgb(244 245 248)',
       'custom-text-select-blue': '#023376',
       'custom-text-select-gray': '#666E7A',
       'primary-gray': '#F2F2F4',
       'secundary-gray': '#4A4A4A',
+      'gray': 'rgba(102, 110, 122, 0.4)',
+      'light-gray': '#909090',
       'dark-blue': '#002C63',
+      'light-blue': '#0360DC',
       'black-transparent': 'rgba(0, 0, 0, 0.2)',
-      'black': '#00000'
+      'black': '#00000',
+      'transparent-gray': 'rgba(190, 190, 190, 0.5)',
+      'light-blue': '#0360DC',
+      'gray': '#4B4B4B',
+      'blue-login': '#002A7B',
+      'red-500': '#ef4444', 
     },
     fontFamily: {
       mont: ['Montserrat', 'sans-serif'],
@@ -35,4 +43,3 @@ export default {
   },
   plugins: [],
 }
-

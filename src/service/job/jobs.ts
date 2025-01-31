@@ -1,6 +1,6 @@
 import { JobRequest } from "../../types/job";
 
-export default async function getJobs(page: number = 0, quantity: number = 10) {
+export default async function getJobs(page = 0, quantity = 10) {
   const urlApi = `http://localhost:8080/crud/vagas?page=${page}&size=${quantity}`;
   try {
     const res = await fetch(urlApi);
