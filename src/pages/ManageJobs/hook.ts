@@ -23,6 +23,7 @@ export default function useManageJobs() {
 
   const [jobsList, setJobsList] = useState<JobManagement[]>();
   const [currentStep, setCurrentStep] = useState(1);
+  const [quantityPages, setQuantityPages] = useState(0);
 
   useEffect(() => {
     const quantityElementsPerPage = getQuantityElementsPerPage();
@@ -31,7 +32,9 @@ export default function useManageJobs() {
       const pageRequested = currentStep - 1;
       const jobsData = await getJobs(pageRequested, quantityElementsPerPage);
 
-      if(jobsData) {
+      if(jobsData && jobsData.vagas) {
+        setQuantityPages(jobsData.totalPages);
+
         const listJobs: JobManagement[] = jobsData.vagas.map(job => {
           return {
             id: job.id,
@@ -58,6 +61,7 @@ export default function useManageJobs() {
     jobsList,
     redirectToCreateJob,
     stepper: {
+      quantityPages,
       currentStep,
       setCurrentStep,
     },

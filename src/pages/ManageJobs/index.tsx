@@ -47,7 +47,7 @@ export default function ManageJobs() {
   }
 
   return(
-    <div className="py-12 px-8">
+    <div className="pt-12 px-8">
       <div className="border-b border-solid border-b-verde-energia">
         <h1 className="text-2xl font-semibold">Vagas</h1>
       </div>
@@ -58,19 +58,19 @@ export default function ManageJobs() {
         <Button variant="primary" className="h-min text-sm font-medium mr-3" onClick={redirectToCreateJob}>+ Nova vaga</Button>
       </div>
 
-      <div className="flex flex-col mx-3 h-[50vh]">
+      <div className="flex flex-col mx-3 mb-3 h-[50vh]">
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
             <div className="overflow-hidden">
               <table className="min-w-full">
-                <thead className="border-b">
+                <thead className="border-b border-b-verde-energia">
                   <tr>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-3 py-3.5 text-left">ID</th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-3 py-3.5 text-left">Nome</th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-3 py-3.5 text-left">Quantidade</th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-3 py-3.5 text-left">Responsável</th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-3 py-3.5 text-left">Estado</th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-3 py-3.5 text-left">Ações</th>
+                    <th scope="col" className="text-sm font-medium text-azul-infinito px-3 py-3.5 text-left">ID</th>
+                    <th scope="col" className="text-sm font-medium text-azul-infinito px-3 py-3.5 text-left">Nome</th>
+                    <th scope="col" className="text-sm font-medium text-azul-infinito px-3 py-3.5 text-left">Quantidade</th>
+                    <th scope="col" className="text-sm font-medium text-azul-infinito px-3 py-3.5 text-left">Responsável</th>
+                    <th scope="col" className="text-sm font-medium text-azul-infinito px-3 py-3.5 text-left">Estado</th>
+                    <th scope="col" className="text-sm font-medium text-azul-infinito px-3 py-3.5 text-left">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -83,7 +83,7 @@ export default function ManageJobs() {
       </div>
 
       <div className="flex justify-end">
-        <Stepper currentStep={stepper.currentStep} qtdSteps={5} setCurrentStep={stepper.setCurrentStep} />
+        <Stepper currentStep={stepper.currentStep} qtdSteps={stepper.quantityPages} setCurrentStep={stepper.setCurrentStep} />
       </div>
     </div>
   );
