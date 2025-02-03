@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import ManageJobs from './pages/ManageJobs';
 import Login from '../src/pages/login/login';
 import Register from './pages/register/register';
-import CreateJob from './pages/CreateJob';
+import FormJob from './pages/FormJob';
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
         </Route>
 
         <Route path='/adm/manageJob/create' element={<LayoutAdmin pageSelected='jobs' />} >
-          <Route index element={<CreateJob />} />
+          <Route index element={<FormJob />} />
         </Route>
 
         <Route path='/adm/candidates' element={<LayoutAdmin pageSelected='candidates' />} >

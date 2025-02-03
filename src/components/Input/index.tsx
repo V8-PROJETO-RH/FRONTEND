@@ -152,7 +152,6 @@ const CustomInput: React.FC<CustomInputProps> = ({
           value={word}
           onChange={handleInputChange}
           className={`flex-grow ${bgColor}  outline-none  text-black`}
-          placeholder="Digite sua senha"
         />
         {type === "password" && (
           <button
