@@ -1,20 +1,29 @@
-import React, { useState, KeyboardEvent, InputHTMLAttributes, ReactNode, useRef, useEffect } from "react";
+import React, {
+  useState,
+  KeyboardEvent,
+  InputHTMLAttributes,
+  ReactNode,
+  useRef,
+  useEffect,
+  forwardRef,
+} from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { IoClose } from "react-icons/io5";
 
 interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  type?: "text" | "password" | "date";
+  type?: "text" | "password" | "date" | "textarea";
   isSearch?: boolean;
   toggleDropdownIcon?: boolean;
-  inputSize?: "xsmall" | "small" | "medium" | "large";
   suggestions?: string[];
   className?: string;
   icon?: ReactNode;
   bgColor?: string;
   fontLabel?: "medium" | "semibold" | "bold";
   enableSelect?: boolean;
+  fontSizeLabel?: string;
   hasError?: boolean;
+  heightSize?: number;
 }
 
 const fontWeightLabels = {
@@ -23,21 +32,22 @@ const fontWeightLabels = {
   bold: "font-bold",
 };
 
-const CustomInput: React.FC<CustomInputProps> = ({
+const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(({
   label,
   type = "text",
   isSearch = false,
   toggleDropdownIcon = false,
-  inputSize = "medium",
   fontLabel = "semibold",
   suggestions = [],
   className,
   icon,
   bgColor = "bg-white",
   enableSelect = false,
+  fontSizeLabel,
+  heightSize,
   hasError = false,
   ...props
-}) => {
+}, ref) => {
   const [word, setWord] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
@@ -119,14 +129,14 @@ const CustomInput: React.FC<CustomInputProps> = ({
     };
   }, []);
 
-  const borderClass = hasError ? "border-red-500" : "border-gray-300";
+  const borderClass = hasError ? "border-red-500" : "border-gray";
 
   return (
     <div
       ref={containerRef}
-      className={`flex flex-col mb-4 relative w-full  ${className}`}
+      className={`flex flex-col relative ${className}`}
     >
-      <label className={`mb-2 ${fontWeightLabels[fontLabel]} text-black`}>
+      <label className={`mb-2 ${fontWeightLabels[fontLabel]} text-${[fontSizeLabel]} text-black`}>
         {label}
       </label>
       {enableSelect && selectedItems.length > 0 && (
@@ -145,31 +155,50 @@ const CustomInput: React.FC<CustomInputProps> = ({
           ))}
         </div>
       )}
-   <div className={`flex items-center ${bgColor}  border ${borderClass} rounded-lg px-3 py-2`}>
-        <input
-          {...props}
-          type={type === "password" && !showPassword ? "password" : "text"}
-          value={word}
-          onChange={handleInputChange}
-          className={`flex-grow ${bgColor}  outline-none  text-black`}
-          placeholder="Digite sua senha"
-        />
+      <div
+        className={`flex items-center ${bgColor} border ${borderClass} rounded-lg px-3 py-2 relative`}
+      >
+        {type === "textarea" ? (
+          <textarea
+            {...(props as any)}
+            className="flex-1 outline-none text-black resize-none"
+            value={word}
+            onChange={handleInputChange}
+            style={{ height: '5.5rem', lineHeight: '1.5', overflowY: 'auto' }}
+          />
+        ) : (
+          <input
+            ref={ref as React.Ref<HTMLInputElement>} 
+            {...props}
+            type={type === "password" && showPassword ? "text" : type}
+            value={word}
+            onChange={handleInputChange}
+            onFocus={() => isSearch && updateDropdown(word)}
+            onKeyUp={handleKeyPress}
+            className={`flex-1 ${bgColor} h-${[heightSize]} outline-none text-black px-0 py-0 w-full`}
+          />
+        )}
+        {icon && (
+          <div className="absolute right-3">
+            {icon}
+          </div>
+        )}
         {type === "password" && (
           <button
             type="button"
             onClick={togglePasswordVisibility}
-            className="ml-2 focus:outline-none "
+            className="ml-2 focus:outline-none"
           >
             {showPassword ? (
-              <AiOutlineEyeInvisible className="w-5 h-5 text-secundary-gray" />
-            ) : (
               <AiOutlineEye className="w-5 h-5 text-secundary-gray" />
+            ) : (
+              <AiOutlineEyeInvisible className="w-5 h-5 text-secundary-gray" />
             )}
           </button>
         )}
         {enableSelect && word.length > 0 ? (
           <IoClose
-            className="w-5 h-5 text-secundary-gray ml-2 cursor-pointer flex-shrink-0"
+            className="w-5 h-5 text-secundary-gray ml-2 cursor-pointer"
             onClick={clearWord}
           />
         ) : (
@@ -177,29 +206,14 @@ const CustomInput: React.FC<CustomInputProps> = ({
             <button
               type="button"
               onClick={toggleDropdownIcon ? toggleDropdown : () => updateDropdown(word)}
-              className="ml-2 flex-shrink-0 focus:outline-none"
+              className="ml-2 focus:outline-none"
             >
               {icon}
             </button>
           )
         )}
-  {enableSelect && word.length > 0 ? (
-    <IoClose
-      className="w-5 h-5 text-secundary-gray ml-2 cursor-pointer flex-shrink-0"
-      onClick={clearWord}
-    />
-  ) : (
-    isSearch && (
-      <button
-        type="button"
-        onClick={toggleDropdownIcon ? toggleDropdown : () => updateDropdown(word)}
-        className="ml-2 flex-shrink-0 focus:outline-none"
-      >
-        {icon}
-      </button>
-    )
-  )}
-</div>
+      </div>
+
       {dropdownOpen && filteredSuggestions.length > 0 && (
         <ul className="scroll-custom border border-gray-300 rounded-lg mt-1 max-h-40 overflow-y-auto bg-white w-full">
           {filteredSuggestions.map((suggestion, index) => (
@@ -215,6 +229,6 @@ const CustomInput: React.FC<CustomInputProps> = ({
       )}
     </div>
   );
-};
+});
 
 export default CustomInput;
