@@ -2,12 +2,19 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import '@testing-library/jest-dom';
 import LoginComponent from './login';
 import AuthService from "../../services/Auth/authservice";
-
+import { useNavigate } from 'react-router-dom';
 
 jest.mock('../../services/Auth/authservice');
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: jest.fn(),
+}));
 
 describe("LoginComponent", () => {
+  const mockNavigate = useNavigate as jest.Mock;
+
   beforeEach(() => {
+    mockNavigate.mockClear();
     render(<LoginComponent />);
   });
 
@@ -40,11 +47,11 @@ describe("LoginComponent", () => {
         email: "test@example.com",
         senha: "Password123!"
       });
+      expect(mockNavigate).toHaveBeenCalledWith('/');
     });
   });
 
   it("should show an error message when login fails", async () => {
-   
     (AuthService.login as jest.Mock).mockRejectedValueOnce(new Error("Login failed"));
 
     fireEvent.change(screen.getByPlaceholderText(/Digite seu e-mail/i), {
@@ -58,5 +65,13 @@ describe("LoginComponent", () => {
     fireEvent.click(screen.getByText(/ENTRAR/i));
 
     expect(await screen.findByText(/Login failed/i)).toBeInTheDocument();
+  });
+
+  it("should handle 'Mantenha logado' checkbox", () => {
+    const checkbox = screen.getByLabelText(/Mantenha logado/i);
+    fireEvent.click(checkbox);
+    expect(checkbox).toBeChecked();
+    fireEvent.click(checkbox);
+    expect(checkbox).not.toBeChecked();
   });
 });

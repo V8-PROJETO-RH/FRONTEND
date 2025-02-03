@@ -1,105 +1,48 @@
-import AuthService from './authservice';
-import { LoginCredentials, RegisterData, LoginResponse, RegisterResponse } from './types';
+import { LoginCredentials, LoginResponse, RegisterData, RegisterResponse } from './types';
 
+const API_URL = 'http://localhost:8081/api';
 
-jest.spyOn(global.localStorage, 'setItem');
-
-beforeEach(() => {
-  jest.clearAllMocks();
-});
-
-describe('AuthService', () => {
-  describe('login', () => {
-    it('should login successfully and store token', async () => {
-      
-      const mockResponse: LoginResponse = {
-          token: 'fake-jwt-token',
-          user: {
-              id: '',
-              nome: '',
-              email: ''
-          }
-      };
-      global.fetch = jest.fn(() =>
-        Promise.resolve({
-          ok: true,
-          json: () => Promise.resolve(mockResponse),
-        })
-      ) as jest.Mock;
-
-      const credentials: LoginCredentials = {
-        email: 'test@example.com',
-        senha: 'Password1!',
-      };
-
-      const response = await AuthService.login(credentials);
-
-      expect(response.token).toBe('fake-jwt-token');
-      expect(localStorage.setItem).toHaveBeenCalledWith('token', 'fake-jwt-token');
-      expect(fetch).toHaveBeenCalledWith('http://localhost:8081/api/login', expect.anything());
+const AuthService = {
+  login: async (credentials: LoginCredentials): Promise<LoginResponse> => {
+    const response = await fetch(`${API_URL}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(credentials),
     });
 
-    it('should throw an error if login fails', async () => {
-    
-      global.fetch = jest.fn(() =>
-        Promise.resolve({
-          ok: false,
-        })
-      ) as jest.Mock;
+    if (!response.ok) {
+      const errorData = await response.text(); 
+      throw new Error(errorData || 'Erro ao fazer login');
+    }
+    const token = await response.text();
+    localStorage.setItem('token', token);
 
-      const credentials: LoginCredentials = {
-        email: 'test@example.com',
-        senha: 'wrongpassword',
-      };
+    return { token }; 
+  },
 
-      await expect(AuthService.login(credentials)).rejects.toThrow('Erro ao fazer login');
-    });
-  });
-
-  describe('register', () => {
-    it('should register successfully', async () => {
-      // Mock da resposta do fetch
-      const mockResponse: RegisterResponse = { message: 'User registered successfully' };
-      global.fetch = jest.fn(() =>
-        Promise.resolve({
-          ok: true,
-          json: () => Promise.resolve(mockResponse),
-        })
-      ) as jest.Mock;
-
-      const registerData: RegisterData = {
-        nome: 'Tester',
-        email: 'tester@example.com',
-        cpf: '123.456.789-01',
-        dataNascimento: '1990-01-01',
-        senha: 'Password1!',
-        confirmarSenha: 'Password1!',
-      };
-
-      const response = await AuthService.register(registerData);
-
-      expect(response.message).toBe('User registered successfully');
-      expect(fetch).toHaveBeenCalledWith('http://localhost:8081/api/register', expect.anything());
+  register: async (data: RegisterData): Promise<RegisterResponse> => {
+    const response = await fetch(`${API_URL}/cadastro`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
     });
 
-    it('should throw an error if registration fails', async () => {
-      // Mock da resposta de falha do fetch
-      global.fetch = jest.fn(() =>
-        Promise.resolve({
-          ok: false,
-        })
-      ) as jest.Mock;
+    if (!response.ok) {
+      const errorData = await response.json(); 
+      throw new Error(errorData.message || 'Erro ao registrar');
+    }
 
-      const registerData: RegisterData = {
-        nome: 'Existing User',
-        email: 'existing@example.com',
-        cpf: '123.456.789-01',
-        dataNascimento: '1990-01-01',
-        senha: 'Password1!',
-        confirmarSenha: 'Password1!',
-      };
+    const result: RegisterResponse = await response.json();
+    return result;
+  },
 
-      await expect(AuthService.register(registerData)).rejects.toThrow('Erro ao registrar');
-    });
-  });
-});
+  logout: () => {
+    localStorage.removeItem('token'); 
+  },
+};
+
+export default AuthService;

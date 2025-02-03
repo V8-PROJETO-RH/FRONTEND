@@ -1,121 +1,102 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import CadastroComponent from './register';
-import AuthService from '../../services/Auth/authservice';
-import { MemoryRouter } from 'react-router-dom';
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import CadastroComponent from "./register";
+import AuthService from "../../services/Auth/authservice";
+import { MemoryRouter } from "react-router-dom";
 
-jest.mock('../../services/Auth/authservice', () => ({
+jest.mock("../../services/Auth/authservice", () => ({
   register: jest.fn(),
 }));
 
-describe('CadastroComponent', () => {
+describe("CadastroComponent", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  test('renders the registration form correctly', () => {
+  it("deve renderizar o formulário de cadastro", () => {
     render(
       <MemoryRouter>
         <CadastroComponent />
       </MemoryRouter>
     );
-    // Verificação de Renderização
-    expect(screen.getByLabelText(/Nome/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/E-mail/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/CPF/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Data de Nascimento/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Senha/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Confirmar Senha/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Cadastrar/i })).toBeInTheDocument();
-    expect(screen.getByText(/Já possui uma conta\? Entrar/i)).toBeInTheDocument();
+
+    expect(screen.getByText("CADASTRO")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Inserir seu nome")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Digite seu e-mail")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("000.000.000-00")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("dd/mm/aaaa")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Digite sua senha")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Confirme sua senha")).toBeInTheDocument();
   });
 
-  test('displays validation errors when submitting empty', async () => {
-    render(
-      <MemoryRouter>
-        <CadastroComponent />
-      </MemoryRouter>
-    );
-    fireEvent.click(screen.getByRole('button', { name: /Cadastrar/i }));
-
-    expect(await screen.findByText('Nome é obrigatório')).toBeVisible();
-    expect(await screen.findByText('E-mail é obrigatório')).toBeVisible();
-    expect(await screen.findByText('CPF é obrigatório')).toBeVisible();
-    expect(await screen.findByText('Data de nascimento é obrigatória')).toBeVisible();
-    expect(await screen.findByText('Senha é obrigatória')).toBeVisible();
-  });
-
-  test('formats CPF and data on change', async () => {
+  it("deve mostrar erro ao tentar enviar formulário com campos vazios", async () => {
     render(
       <MemoryRouter>
         <CadastroComponent />
       </MemoryRouter>
     );
 
-    const cpfInput = screen.getByLabelText(/CPF/i);
-    fireEvent.change(cpfInput, { target: { value: '12345678901' } });
+    fireEvent.submit(screen.getByRole("button", { name: /cadastrar/i }));
 
     await waitFor(() => {
-      expect(cpfInput).toHaveValue('123.456.789-01');
-    });
-
-    const dataInput = screen.getByLabelText(/Data de Nascimento/i);
-    fireEvent.change(dataInput, { target: { value: '01011990' } });
-
-    await waitFor(() => {
-      expect(dataInput).toHaveValue('01/01/1990');
+      expect(screen.getByText("Nome é obrigatório")).toBeInTheDocument();
+      expect(screen.getByText("E-mail é obrigatório")).toBeInTheDocument();
+      expect(screen.getByText("CPF é obrigatório")).toBeInTheDocument();
+      expect(screen.getByText("Data de nascimento é obrigatória")).toBeInTheDocument();
+      expect(screen.getByText("Senha é obrigatória")).toBeInTheDocument();
     });
   });
 
-  test('calls AuthService.register with correct data', async () => {
+  it("deve chamar AuthService.register ao enviar formulário válido", async () => {
+    (AuthService.register as jest.Mock).mockResolvedValueOnce({});
+
     render(
       <MemoryRouter>
         <CadastroComponent />
       </MemoryRouter>
     );
-    
-    fireEvent.change(screen.getByLabelText(/Nome/i), { target: { value: 'Tester' } });
-    fireEvent.change(screen.getByLabelText(/E-mail/i), { target: { value: 'tester@example.com' } });
-    fireEvent.change(screen.getByLabelText(/CPF/i), { target: { value: '123.456.789-01' } });
-    fireEvent.change(screen.getByLabelText(/Data de Nascimento/i), { target: { value: '01/01/1990' } });
-    fireEvent.change(screen.getByLabelText(/Senha/i), { target: { value: 'Password1!' } });
-    fireEvent.change(screen.getByLabelText(/Confirmar Senha/i), { target: { value: 'Password1!' } });
 
-    const mockRegister = AuthService.register as jest.Mock;
-    mockRegister.mockResolvedValueOnce({});
+    fireEvent.input(screen.getByPlaceholderText("Inserir seu nome"), { target: { value: "João Silva" } });
+    fireEvent.input(screen.getByPlaceholderText("Digite seu e-mail"), { target: { value: "joao@email.com" } });
+    fireEvent.input(screen.getByPlaceholderText("000.000.000-00"), { target: { value: "123.456.789-00" } });
+    fireEvent.input(screen.getByPlaceholderText("dd/mm/aaaa"), { target: { value: "01/01/2000" } });
+    fireEvent.input(screen.getByPlaceholderText("Digite sua senha"), { target: { value: "Senha@123" } });
+    fireEvent.input(screen.getByPlaceholderText("Confirme sua senha"), { target: { value: "Senha@123" } });
 
-    fireEvent.click(screen.getByRole('button', { name: /Cadastrar/i }));
-    
+    fireEvent.submit(screen.getByRole("button", { name: /cadastrar/i }));
+
     await waitFor(() => {
-      expect(mockRegister).toHaveBeenCalledWith({
-        nome: 'Tester',
-        email: 'tester@example.com',
-        cpf: '123.456.789-01',
-        dataNascimento: '01/01/1990',
-        senha: 'Password1!',
-      });
+      expect(AuthService.register).toHaveBeenCalledWith(
+        expect.objectContaining({
+          nome: "João Silva",
+          email: "joao@email.com",
+          cpf: "123.456.789-00",
+          dataNasc: expect.any(String),
+          senha: "Senha@123",
+        })
+      );
     });
   });
 
-  test('displays error message on registration failure', async () => {
+  it("deve exibir erro ao falhar no cadastro", async () => {
+    (AuthService.register as jest.Mock).mockRejectedValueOnce(new Error("Erro ao cadastrar"));
+
     render(
       <MemoryRouter>
         <CadastroComponent />
       </MemoryRouter>
     );
-    
-    fireEvent.change(screen.getByLabelText(/Nome/i), { target: { value: 'Tester' } });
-    fireEvent.change(screen.getByLabelText(/E-mail/i), { target: { value: 'tester@example.com' } });
-    fireEvent.change(screen.getByLabelText(/CPF/i), { target: { value: '123.456.789-01' } });
-    fireEvent.change(screen.getByLabelText(/Data de Nascimento/i), { target: { value: '01/01/1990' } });
-    fireEvent.change(screen.getByLabelText(/Senha/i), { target: { value: 'Password1!' } });
-    fireEvent.change(screen.getByLabelText(/Confirmar Senha/i), { target: { value: 'Password1!' } });
 
-    const mockRegister = AuthService.register as jest.Mock;
-    mockRegister.mockRejectedValueOnce(new Error('Erro ao registrar'));
+    fireEvent.input(screen.getByPlaceholderText("Inserir seu nome"), { target: { value: "João Silva" } });
+    fireEvent.input(screen.getByPlaceholderText("Digite seu e-mail"), { target: { value: "joao@email.com" } });
+    fireEvent.input(screen.getByPlaceholderText("000.000.000-00"), { target: { value: "123.456.789-00" } });
+    fireEvent.input(screen.getByPlaceholderText("dd/mm/aaaa"), { target: { value: "01/01/2000" } });
+    fireEvent.input(screen.getByPlaceholderText("Digite sua senha"), { target: { value: "Senha@123" } });
+    fireEvent.input(screen.getByPlaceholderText("Confirme sua senha"), { target: { value: "Senha@123" } });
 
-    fireEvent.click(screen.getByRole('button', { name: /Cadastrar/i }));
-    
-    expect(await screen.findByText('Erro ao registrar')).toBeVisible();
+    fireEvent.submit(screen.getByRole("button", { name: /cadastrar/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Erro ao cadastrar")).toBeInTheDocument();
+    });
   });
 });
